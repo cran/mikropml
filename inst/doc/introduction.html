@@ -351,7 +351,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 
-<p>The goal of <code>mikropml</code> is to make supervised machine learning (ML) easy for you to run while not losing any of the rigor associated with robust machine learning pipelines. All you need to run ML is one function: <code>run_ml()</code>. We’ve selected sensible default arguments related to best practices <span class="citation">(Topçuoğlu et al. 2020, @tang_democratizing_2020)</span>, but we allow you to change those arguments to tailor <code>run_ml()</code> to the needs of your data.</p>
+<p>The goal of <code>mikropml</code> is to make supervised machine learning (ML) easy for you to run while implementing good practices for machine learning pipelines. All you need to run ML is one function: <code>run_ml()</code>. We’ve selected sensible default arguments related to good practices <span class="citation">(Topçuoğlu et al. 2020; Tang et al. 2020)</span>, but we allow you to change those arguments to tailor <code>run_ml()</code> to the needs of your data.</p>
 <p>This document takes you through all of the <code>run_ml()</code> inputs, both required and optional, as well as the outputs.</p>
 <p>In summary, you provide:</p>
 <ul>
@@ -422,7 +422,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <li>The outcome column name. By default <code>run_ml()</code> will pick the first column, but it’s best practice to specify the column name explicitly.</li>
 <li>A seed so that the results will be reproducible, and so that you get the same results as those you see here (i.e have the same train/test split).</li>
 </ul>
-<p>Say we want to use <code>glmnet</code>. Then, run ML with:</p>
+<p>Say we want to use <code>glmnet</code>.Then, run ML with:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">results &lt;-<span class="st"> </span><span class="kw">run_ml</span>(otu_mini_bin,</a>
 <a class="sourceLine" id="cb2-2" title="2">                  <span class="st">&#39;glmnet&#39;</span>,</a>
 <a class="sourceLine" id="cb2-3" title="3">                  <span class="dt">outcome_colname =</span> <span class="st">&#39;dx&#39;</span>,</a>
@@ -569,16 +569,16 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>Now, we can check out the feature importances:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">results_imp<span class="op">$</span>feature_importance</a>
 <a class="sourceLine" id="cb15-2" title="2"><span class="co">#&gt;    perf_metric perf_metric_diff    names method perf_metric_name seed</span></a>
-<a class="sourceLine" id="cb15-3" title="3"><span class="co">#&gt; 1    0.5421875        0.0203125 Otu00009     rf              AUC 2019</span></a>
-<a class="sourceLine" id="cb15-4" title="4"><span class="co">#&gt; 2    0.5104625        0.0520375 Otu00005     rf              AUC 2019</span></a>
-<a class="sourceLine" id="cb15-5" title="5"><span class="co">#&gt; 3    0.5014375        0.0610625 Otu00010     rf              AUC 2019</span></a>
-<a class="sourceLine" id="cb15-6" title="6"><span class="co">#&gt; 4    0.5508000        0.0117000 Otu00001     rf              AUC 2019</span></a>
-<a class="sourceLine" id="cb15-7" title="7"><span class="co">#&gt; 5    0.5275125        0.0349875 Otu00008     rf              AUC 2019</span></a>
-<a class="sourceLine" id="cb15-8" title="8"><span class="co">#&gt; 6    0.6441750       -0.0816750 Otu00004     rf              AUC 2019</span></a>
-<a class="sourceLine" id="cb15-9" title="9"><span class="co">#&gt; 7    0.5527750        0.0097250 Otu00003     rf              AUC 2019</span></a>
-<a class="sourceLine" id="cb15-10" title="10"><span class="co">#&gt; 8    0.5695750       -0.0070750 Otu00002     rf              AUC 2019</span></a>
-<a class="sourceLine" id="cb15-11" title="11"><span class="co">#&gt; 9    0.5435875        0.0189125 Otu00007     rf              AUC 2019</span></a>
-<a class="sourceLine" id="cb15-12" title="12"><span class="co">#&gt; 10   0.5487625        0.0137375 Otu00006     rf              AUC 2019</span></a></code></pre></div>
+<a class="sourceLine" id="cb15-3" title="3"><span class="co">#&gt; 1    0.5411250        0.0213750 Otu00009     rf              AUC 2019</span></a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="co">#&gt; 2    0.5179625        0.0445375 Otu00005     rf              AUC 2019</span></a>
+<a class="sourceLine" id="cb15-5" title="5"><span class="co">#&gt; 3    0.4996375        0.0628625 Otu00010     rf              AUC 2019</span></a>
+<a class="sourceLine" id="cb15-6" title="6"><span class="co">#&gt; 4    0.5520625        0.0104375 Otu00001     rf              AUC 2019</span></a>
+<a class="sourceLine" id="cb15-7" title="7"><span class="co">#&gt; 5    0.5322750        0.0302250 Otu00008     rf              AUC 2019</span></a>
+<a class="sourceLine" id="cb15-8" title="8"><span class="co">#&gt; 6    0.6352875       -0.0727875 Otu00004     rf              AUC 2019</span></a>
+<a class="sourceLine" id="cb15-9" title="9"><span class="co">#&gt; 7    0.5527375        0.0097625 Otu00003     rf              AUC 2019</span></a>
+<a class="sourceLine" id="cb15-10" title="10"><span class="co">#&gt; 8    0.5723000       -0.0098000 Otu00002     rf              AUC 2019</span></a>
+<a class="sourceLine" id="cb15-11" title="11"><span class="co">#&gt; 9    0.5423500        0.0201500 Otu00007     rf              AUC 2019</span></a>
+<a class="sourceLine" id="cb15-12" title="12"><span class="co">#&gt; 10   0.5448000        0.0177000 Otu00006     rf              AUC 2019</span></a></code></pre></div>
 <p>There are several columns:</p>
 <ol style="list-style-type: decimal">
 <li><code>perf_metric</code>: The performance metric of the permuted feature.</li>
@@ -604,9 +604,9 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <a class="sourceLine" id="cb16-12" title="12"><span class="co">#&gt; This warning usually means that the model didn&#39;t converge in some cross-validation folds because it is predicting something close to a constant. As a result, certain performance metrics can&#39;t be calculated. This suggests that some of the hyperparameters chosen are doing very poorly.</span></a>
 <a class="sourceLine" id="cb16-13" title="13">results_imp_corr<span class="op">$</span>feature_importance</a>
 <a class="sourceLine" id="cb16-14" title="14"><span class="co">#&gt;   perf_metric perf_metric_diff</span></a>
-<a class="sourceLine" id="cb16-15" title="15"><span class="co">#&gt; 1   0.5969211      0.050447368</span></a>
-<a class="sourceLine" id="cb16-16" title="16"><span class="co">#&gt; 2   0.6395263      0.007842105</span></a>
-<a class="sourceLine" id="cb16-17" title="17"><span class="co">#&gt; 3   0.5663684      0.081000000</span></a>
+<a class="sourceLine" id="cb16-15" title="15"><span class="co">#&gt; 1   0.5992368       0.04813158</span></a>
+<a class="sourceLine" id="cb16-16" title="16"><span class="co">#&gt; 2   0.6369474       0.01042105</span></a>
+<a class="sourceLine" id="cb16-17" title="17"><span class="co">#&gt; 3   0.5431579       0.10421053</span></a>
 <a class="sourceLine" id="cb16-18" title="18"><span class="co">#&gt;                                                                     names</span></a>
 <a class="sourceLine" id="cb16-19" title="19"><span class="co">#&gt; 1                                                                Otu00008</span></a>
 <a class="sourceLine" id="cb16-20" title="20"><span class="co">#&gt; 2                                                                Otu00004</span></a>

@@ -1,8 +1,8 @@
 #' Run the machine learning pipeline
 #'
 #' This function runs machine learning (ML), evaluates the best model,
-#' and optionally calculates feature importance using a robust framework
-#' outlined in Topçuoğlu _et al._ 2020 ([doi:10.1128/mBio.00434-20](https://doi.org/10.1128/mBio.00434-20)).
+#' and optionally calculates feature importance using the framework
+#' outlined in Topçuoğlu _et al._ 2020 (\doi{10.1128/mBio.00434-20}).
 #' Required inputs are a dataframe with an outcome variable and other columns
 #' as features, as well as the ML method.
 #' See `vignette('introduction')` for more details.
@@ -65,7 +65,7 @@
 #' @author Kelly Sovacool, \email{sovacool@@umich.edu}
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' run_ml(otu_small, "glmnet",
 #'   seed = 2019
 #' )
@@ -158,7 +158,7 @@ run_ml <-
     )
 
     model_formula <- stats::as.formula(paste(outcome_colname, "~ ."))
-
+    message("Training the model...")
     trained_model_caret <- train_model(
       model_formula,
       train_data,
@@ -168,6 +168,7 @@ run_ml <-
       tune_grid,
       ntree
     )
+    message("Training complete.")
     if (!is.na(seed)) {
       set.seed(seed)
     }
@@ -184,6 +185,7 @@ run_ml <-
     )
     feature_importance_tbl <- "Skipped feature importance"
     if (find_feature_importance) {
+      message("Finding feature importance...")
       feature_importance_tbl <- get_feature_importance(
         trained_model_caret,
         train_data,
@@ -196,6 +198,7 @@ run_ml <-
         seed,
         corr_thresh
       )
+      message("Feature importance complete.")
     }
 
     return(

@@ -59,3 +59,22 @@ test_that("mutate_all_types converts factors to other types", {
   expect_equal(class(dat2$c2), "integer")
   expect_equal(class(dat2$c3), "numeric")
 })
+
+test_that("replace_spaces works", {
+  expect_equal(
+    replace_spaces(c("outcome 1", "outcome 2", "outcome 1")),
+    c("outcome_1", "outcome_2", "outcome_1")
+  )
+  expect_equal(
+    replace_spaces(c("no_spaces_here", "none")),
+    c("no_spaces_here", "none")
+  )
+})
+
+test_that("pbtick() updates the progress bar", {
+  f <- function() {
+    pb <- progressr::progressor(steps = 5)
+    pbtick(pb, message = "progress!")
+  }
+  expect_condition(expect_invisible(f()))
+})

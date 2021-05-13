@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# mikropml
+# mikropml <a href='http://www.schlosslab.org/mikropml/'><img src='man/figures/logo.png' align="right" height="120" /></a>
 
 > meek-ROPE em el
 
@@ -14,6 +14,8 @@ User-Friendly R Package for Supervised Machine Learning Pipelines
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/SchlossLab/mikropml/blob/master/LICENSE.md)
 [![CRAN](https://img.shields.io/cran/v/mikropml?color=blue&label=CRAN&logo=R)](https://CRAN.R-project.org/package=mikropml)
 [![Conda](https://img.shields.io/conda/vn/conda-forge/r-mikropml)](https://anaconda.org/conda-forge/r-mikropml)
+![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/mikropml)
+[![JOSS](https://joss.theoj.org/papers/72bf31a3f51f8fc273ef6b99bd04ede1/status.svg)](https://joss.theoj.org/papers/72bf31a3f51f8fc273ef6b99bd04ede1)
 <!-- badges: end -->
 
 An interface to build machine learning models for classification and
@@ -50,10 +52,10 @@ conda install -c conda-forge r-mikropml
 
 ### Dependencies
 
-  - Imports: caret, dplyr, e1071, glmnet, kernlab, MLmetrics,
+-   Imports: caret, dplyr, e1071, glmnet, kernlab, MLmetrics,
     randomForest, rlang, rpart, stats, utils, xgboost
-  - Suggests: doFuture, foreach, future, future.apply, ggplot2, knitr,
-    purrr, rmarkdown, testthat, tidyr
+-   Suggests: doFuture, foreach, future, future.apply, ggplot2, knitr,
+    progress, progressr, purrr, rmarkdown, testthat, tidyr
 
 ## Usage
 
@@ -83,6 +85,14 @@ Code of
 Conduct](http://www.schlosslab.org/mikropml/CODE_OF_CONDUCT.html). By
 contributing to this project, you agree to abide by its terms.
 
+## License
+
+The mikropml package is licensed under [the MIT
+license](https://github.com/SchlossLab/mikropml/blob/master/LICENSE.md).
+Text and images included in this repository, including the mikropml
+logo, are licensed under the [CC BY 4.0
+license](https://creativecommons.org/licenses/by/4.0/).
+
 ## Why the name?
 
 The word “mikrop” (pronounced “meek-ROPE”) is Turkish for “microbe”.
@@ -90,4 +100,4 @@ This package was originally implemented as a machine learning pipeline
 for microbiome-based classification problems (see [Topçuoğlu *et al.*
 2020](https://doi.org/10.1128/mBio.00434-20)). We realized that these
 methods are applicable in many other fields too, but stuck with the name
-because we like it\!
+because we like it!

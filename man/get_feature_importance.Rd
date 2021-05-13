@@ -2,7 +2,7 @@
 % Please edit documentation in R/feature_importance.R
 \name{get_feature_importance}
 \alias{get_feature_importance}
-\title{Get feature importance using permutation method}
+\title{Get feature importance using the permutation method}
 \usage{
 get_feature_importance(
   trained_model,
@@ -14,7 +14,9 @@ get_feature_importance(
   class_probs,
   method,
   seed = NA,
-  corr_thresh = 1
+  corr_thresh = 1,
+  groups = NULL,
+  nperms = 100
 )
 }
 \arguments{
@@ -57,23 +59,69 @@ Your results will only be reproducible if you set a seed.}
 
 \item{corr_thresh}{For feature importance, group correlations
 above or equal to \code{corr_thresh} (range \code{0} to \code{1}; default: \code{1}).}
+
+\item{groups}{Vector of feature names to group together during permutation.
+Each element should be a string with feature names separated by a pipe
+character (\code{|}). If this is \code{NULL} (default), correlated features will be
+grouped together based on \code{corr_thresh}.}
+
+\item{nperms}{number of permutations to perform (default: \code{100}).}
 }
 \value{
 Dataframe with performance metrics for when each feature (or group of
 correlated features; \code{names}) is permuted (\code{perf_metric}), and differences
 between test performance metric and permuted performance metric
-(\code{perf_metric_diff}). The performance metric name (\code{perf_metric_name}) and
-seed (\code{seed}) are also returned.
+(\code{perf_metric_diff}; test minus permuted performance). Features with a
+larger \code{perf_metric_diff} are more important. The performance metric name
+(\code{perf_metric_name}) and seed (\code{seed}) are also returned.
 }
 \description{
 Calculates feature importance using a trained model and test data. Requires
 the \code{future.apply} package.
 }
 \examples{
-\donttest{
+\dontrun{
 results <- run_ml(otu_small, "glmnet", kfold = 2, cv_times = 2)
 names(results$trained_model$trainingData)[1] <- "dx"
 get_feature_importance(results$trained_model,
+  results$trained_model$trainingData, results$test_data,
+  "dx",
+  multiClassSummary, "AUC",
+  class_probs = TRUE, method = "glmnet"
+)
+
+# optionally, you can group features together with a custom grouping
+get_feature_importance(results$trained_model,
+  results$trained_model$trainingData, results$test_data,
+  "dx",
+  multiClassSummary, "AUC",
+  class_probs = TRUE, method = "glmnet",
+  groups = c(
+    "Otu00007", "Otu00008", "Otu00009", "Otu00011", "Otu00012",
+    "Otu00015", "Otu00016", "Otu00018", "Otu00019", "Otu00020", "Otu00022",
+    "Otu00023", "Otu00025", "Otu00028", "Otu00029", "Otu00030", "Otu00035",
+    "Otu00036", "Otu00037", "Otu00038", "Otu00039", "Otu00040", "Otu00047",
+    "Otu00050", "Otu00052", "Otu00054", "Otu00055", "Otu00056", "Otu00060",
+    "Otu00003|Otu00002|Otu00005|Otu00024|Otu00032|Otu00041|Otu00053",
+    "Otu00014|Otu00021|Otu00017|Otu00031|Otu00057",
+    "Otu00013|Otu00006", "Otu00026|Otu00001|Otu00034|Otu00048",
+    "Otu00033|Otu00010",
+    "Otu00042|Otu00004", "Otu00043|Otu00027|Otu00049", "Otu00051|Otu00045",
+    "Otu00058|Otu00044", "Otu00059|Otu00046"
+  )
+)
+
+# the function can show a progress bar if you have the progressr package installed
+## optionally, specify the progress bar format
+progressr::handlers(progressr::handler_progress(
+  format = ":message :bar :percent | elapsed: :elapsed | eta: :eta",
+  clear = FALSE,
+  show_after = 0
+))
+## tell progressr to always report progress
+progressr::handlers(global = TRUE)
+## run the function and watch the live progress udpates
+feat_imp <- get_feature_importance(results$trained_model,
   results$trained_model$trainingData, results$test_data,
   "dx",
   multiClassSummary, "AUC",

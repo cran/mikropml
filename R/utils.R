@@ -131,3 +131,60 @@ select_apply <- function(fun = "apply") {
 mutate_all_types <- function(dat) {
   return(dat %>% dplyr::mutate_all(utils::type.convert, as.is = TRUE))
 }
+
+#' Replace spaces in all elements of a character vector with underscores
+#'
+#' @param x a character vector
+#' @param new_char the character to replace spaces (default: `_`)
+#'
+#' @return character vector with all spaces replaced with `new_char`
+#' @export
+#' @author Kelly Sovacool, \email{sovacool@@umich.edu}
+#'
+#' @examples
+#' dat <- data.frame(
+#'   dx = c("outcome 1", "outcome 2", "outcome 1"),
+#'   a = 1:3, b = c(5, 7, 1)
+#' )
+#' dat$dx <- replace_spaces(dat$dx)
+#' dat
+replace_spaces <- function(x, new_char = "_") {
+  gsub(" ", new_char, x)
+}
+
+#' Update progress if the progress bar is not `NULL`.
+#'
+#' This allows for flexible code that only initializes a progress bar if the
+#' `progressr` package is installed.
+#'
+#' @param pb a progress bar created with `progressr`.
+#' @param message optional message to report (default: `NULL`).
+#'
+#' @noRd
+#' @author Kelly Sovacool \email{sovacool@@umich.edu}
+#'
+#' @examples
+#' f <- function() {
+#'   if (isTRUE(check_packages_installed("progressr"))) {
+#'     pb <- progressr::progressor(steps = 5, message = "looping")
+#'   } else {
+#'     pb <- NULL
+#'   }
+#'   for (i in 1:5) {
+#'     pbtick(pb)
+#'     Sys.sleep(0.5)
+#'   }
+#' }
+#' progressr::with_progress(
+#'   f()
+#' )
+pbtick <- function(pb, message = NULL) {
+  if (!is.null(pb)) {
+    if (!is.null(message)) {
+      pb(message)
+    } else {
+      pb()
+    }
+  }
+  invisible()
+}

@@ -15,26 +15,25 @@
 #' get_outcome_type(c("a", "b", "b"))
 #' get_outcome_type(c("a", "b", "c"))
 get_outcome_type <- function(outcomes_vec) {
+  num_outcomes <- length(unique(outcomes_vec))
+  if (num_outcomes < 2) {
+    stop(
+      paste0(
+        "A continuous, binary, or multi-class outcome variable is required, but this dataset has ",
+        num_outcomes,
+        " outcome(s)."
+      )
+    )
+  }
   if (is.numeric(outcomes_vec)) {
     # regression
     otype <- "continuous"
+  } else if (num_outcomes == 2) {
+    # binary classification
+    otype <- "binary"
   } else {
-    num_outcomes <- length(unique(outcomes_vec))
-    if (num_outcomes < 2) {
-      stop(
-        paste0(
-          "A continuous, binary, or multi-class outcome variable is required, but this dataset has ",
-          num_outcomes,
-          " outcome(s)."
-        )
-      )
-    } else if (num_outcomes == 2) {
-      # binary classification
-      otype <- "binary"
-    } else {
-      # multi-class classification
-      otype <- "multiclass"
-    }
+    # multi-class classification
+    otype <- "multiclass"
   }
   return(otype)
 }
@@ -108,7 +107,7 @@ get_perf_metric_name <- function(outcome_type) {
 #' @author Zena Lapp, \email{zenalapp@@umich.edu}
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' results <- run_ml(otu_small, "glmnet", kfold = 2, cv_times = 2)
 #' calc_perf_metrics(results$test_data,
 #'   results$trained_model,
@@ -145,8 +144,7 @@ calc_perf_metrics <- function(test_data, trained_model, outcome_colname, perf_me
 #' @export
 #'
 #' @examples
-#'
-#' \donttest{
+#' \dontrun{
 #' results <- run_ml(otu_small, "glmnet", kfold = 2, cv_times = 2)
 #' names(results$trained_model$trainingData)[1] <- "dx"
 #' get_performance_tbl(results$trained_model, results$test_data,

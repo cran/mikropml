@@ -38,8 +38,7 @@ cv_times = 2
 
 
 test_that("train_model works", {
-  # NOTE: these tests pass when you run test(), but not when you run test_file()
-  # Perhaps something weird is going on with random seeds.
+  skip_on_cran() # this functionality is already tested in test-run_ml.R
   set.seed(2019)
   expect_equal(
     train_model(
@@ -51,8 +50,8 @@ test_that("train_model works", {
       "AUC",
       tg_rf,
       1000
-    )$bestTune,
-    data.frame(mtry = 1L)
+    )$bestTune$mtry,
+    2L
   )
 
   set.seed(2019)

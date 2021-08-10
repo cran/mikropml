@@ -1,7 +1,7 @@
 Package: mikropml
 Title: User-Friendly R Package for Supervised Machine Learning
         Pipelines
-Version: 1.0.0
+Version: 1.1.0
 Authors@R: c(
     person(given = "Begüm",
            family = "Topçuoğlu",
@@ -24,28 +24,38 @@ Authors@R: c(
     person(given = "Evan",
            family = "Snitkin",
            role = c('aut'),
-           comment = c(ORCID = "0000-0001-8409-278X")),
+           comment = c(ORCID = "0000-0001-8409-278X")
+           ),
     person(given = "Jenna",
            family = "Wiens",
            role = c('aut'),
-           comment = c(ORCID = "0000-0002-1057-7722")),
+           comment = c(ORCID = "0000-0002-1057-7722")
+           ),
     person(given = "Patrick",
            family = "Schloss",
            role = c('aut'),
            email = 'pschloss@umich.edu',
-           comment = c(ORCID = "0000-0002-6935-4275")),
+           comment = c(ORCID = "0000-0002-6935-4275")
+           ),
     person(given = "Nick",
            family = "Lesniak",
            role = c("ctb"),
            email = "nlesniak@umich.edu",
-           comment = c(ORCID = "0000-0001-9359-5194")),
+           comment = c(ORCID = "0000-0001-9359-5194")
+           ),
     person(given = "Courtney",
            family = "Armour",
            role = c("ctb"),
            email = "armourc@umich.edu",
-           comment = c(ORCID = "0000-0002-5250-1224")))
-Date: 2021-05-13
-URL: http://www.schlosslab.org/mikropml/,
+           comment = c(ORCID = "0000-0002-5250-1224")
+           ),
+    person(given = "Sarah",
+           family = "Lucas",
+           role = c("ctb"),
+           email = "salucas@umich.edu",
+           comment = c(ORCID = "0000-0003-1676-5801")))
+Date: 2021-08-10
+URL: https://www.schlosslab.org/mikropml/,
         https://github.com/SchlossLab/mikropml
 BugReports: https://github.com/SchlossLab/mikropml/issues
 Description: An interface to build machine learning models for classification 
@@ -53,7 +63,7 @@ Description: An interface to build machine learning models for classification
     by Topçuoğlu et al. (2020) <doi:10.1128/mBio.00434-20> with reasonable 
     default options for data preprocessing, hyperparameter tuning, 
     cross-validation, testing, model evaluation, and interpretation steps. 
-    See the website <http://www.schlosslab.org/mikropml/> for more information, 
+    See the website <https://www.schlosslab.org/mikropml/> for more information, 
     documentation, and examples.
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -66,7 +76,7 @@ Suggests: doFuture, foreach, future, future.apply, ggplot2, knitr,
 VignetteBuilder: knitr
 Depends: R (>= 2.10)
 NeedsCompilation: no
-Packaged: 2021-05-13 15:30:24 UTC; kelly
+Packaged: 2021-08-10 14:24:22 UTC; kelly
 Author: Begüm Topçuoğlu [aut] (<https://orcid.org/0000-0003-3140-537X>),
   Zena Lapp [aut] (<https://orcid.org/0000-0003-4674-2176>),
   Kelly Sovacool [aut, cre] (<https://orcid.org/0000-0003-3283-829X>),
@@ -74,7 +84,8 @@ Author: Begüm Topçuoğlu [aut] (<https://orcid.org/0000-0003-3140-537X>),
   Jenna Wiens [aut] (<https://orcid.org/0000-0002-1057-7722>),
   Patrick Schloss [aut] (<https://orcid.org/0000-0002-6935-4275>),
   Nick Lesniak [ctb] (<https://orcid.org/0000-0001-9359-5194>),
-  Courtney Armour [ctb] (<https://orcid.org/0000-0002-5250-1224>)
+  Courtney Armour [ctb] (<https://orcid.org/0000-0002-5250-1224>),
+  Sarah Lucas [ctb] (<https://orcid.org/0000-0003-1676-5801>)
 Maintainer: Kelly Sovacool <sovacool@umich.edu>
 Repository: CRAN
-Date/Publication: 2021-05-13 23:20:06 UTC
+Date/Publication: 2021-08-10 15:40:04 UTC

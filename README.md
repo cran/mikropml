@@ -15,7 +15,7 @@ User-Friendly R Package for Supervised Machine Learning Pipelines
 [![CRAN](https://img.shields.io/cran/v/mikropml?color=blue&label=CRAN&logo=R)](https://CRAN.R-project.org/package=mikropml)
 [![Conda](https://img.shields.io/conda/vn/conda-forge/r-mikropml)](https://anaconda.org/conda-forge/r-mikropml)
 ![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/mikropml)
-[![JOSS](https://joss.theoj.org/papers/72bf31a3f51f8fc273ef6b99bd04ede1/status.svg)](https://joss.theoj.org/papers/72bf31a3f51f8fc273ef6b99bd04ede1)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.03073/status.svg)](https://doi.org/10.21105/joss.03073)
 <!-- badges: end -->
 
 An interface to build machine learning models for classification and
@@ -65,6 +65,11 @@ for a quick start tutorial. For a more in-depth discussion, read [all
 the vignettes](http://www.schlosslab.org/mikropml/articles/index.html)
 and/or take a look at the [reference
 documentation](http://www.schlosslab.org/mikropml/reference/index.html).
+
+You can watch the Riffomonas Project series of [video
+tutorials](https://www.youtube.com/playlist?list=PLmNrK_nkqBpKpzb9-vI4V7SdXC-jXEcmg)
+covering mikropml and other skills related to machine learning.
+
 We also provide an [example Snakemake
 workflow](https://github.com/SchlossLab/mikropml-snakemake-workflow) for
 running `mikropml` on an HPC.
@@ -92,6 +97,24 @@ license](https://github.com/SchlossLab/mikropml/blob/master/LICENSE.md).
 Text and images included in this repository, including the mikropml
 logo, are licensed under the [CC BY 4.0
 license](https://creativecommons.org/licenses/by/4.0/).
+
+## Citation
+
+
+    To cite mikRopML in publications, use:
+
+      Topçuoğlu et al. (2020). mikropml: User-Friendly R Package for
+      Supervised Machine Learning Pipelines.
+      http://www.schlosslab.org/mikropml/
+
+    A BibTeX entry for LaTeX users is
+
+      @Manual{,
+        title = {{mikropml}: User-Friendly R Package for Supervised Machine Learning Pipelines},
+        author = {Begüm D. Topçuoğlu and Zena Lapp and Kelly L. Sovacool and Evan Snitkin and Jenna Wiens and Patrick D. Schloss},
+        year = {2020},
+        url = {http://www.schlosslab.org/mikropml/},
+      }
 
 ## Why the name?
 

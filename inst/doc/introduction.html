@@ -276,7 +276,7 @@ div.csl-indent {
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 30      179        6       30</span></span></code></pre></div>
 <p><code>performance</code> is a dataframe of (mainly) performance metrics (1 column for cross-validation performance metric, several for test performance metrics, and 2 columns at the end with ML method and seed):</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>results<span class="sc">$</span>performance</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 x 17</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 17</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   cv_metric_AUC logLoss   AUC prAUC Accuracy Kappa    F1 Sensitivity Specificity</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1         0.622   0.684 0.647 0.606    0.590 0.179   0.6         0.6       0.579</span></span>
@@ -350,7 +350,7 @@ div.csl-indent {
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Training complete.</span></span></code></pre></div>
 <p>You’ll see that the cross-valdaton metric is prAUC, instead of the default AUC:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>results_pr<span class="sc">$</span>performance</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 x 17</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 17</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   cv_metric_prAUC logLoss   AUC prAUC Accuracy  Kappa    F1 Sensitivity</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;</span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1           0.577   0.691 0.663 0.605    0.538 0.0539 0.690           1</span></span>
@@ -387,16 +387,16 @@ div.csl-indent {
 <p>Now, we can check out the feature importances:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>results_imp<span class="sc">$</span>feature_importance</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    perf_metric perf_metric_diff    names method perf_metric_name seed</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    0.5411250        0.0213750 Otu00009     rf              AUC 2019</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    0.5179625        0.0445375 Otu00005     rf              AUC 2019</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    0.4996375        0.0628625 Otu00010     rf              AUC 2019</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4    0.5520625        0.0104375 Otu00001     rf              AUC 2019</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5    0.5322750        0.0302250 Otu00008     rf              AUC 2019</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6    0.6352875       -0.0727875 Otu00004     rf              AUC 2019</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7    0.5527375        0.0097625 Otu00003     rf              AUC 2019</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8    0.5723000       -0.0098000 Otu00002     rf              AUC 2019</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9    0.5423500        0.0201500 Otu00007     rf              AUC 2019</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10   0.5448000        0.0177000 Otu00006     rf              AUC 2019</span></span></code></pre></div>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    0.5542375        0.0082625 Otu00001     rf              AUC 2019</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    0.5731750       -0.0106750 Otu00002     rf              AUC 2019</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    0.5548750        0.0076250 Otu00003     rf              AUC 2019</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4    0.6414750       -0.0789750 Otu00004     rf              AUC 2019</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5    0.5049625        0.0575375 Otu00005     rf              AUC 2019</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6    0.5444500        0.0180500 Otu00006     rf              AUC 2019</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7    0.5417125        0.0207875 Otu00007     rf              AUC 2019</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8    0.5257750        0.0367250 Otu00008     rf              AUC 2019</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9    0.5395750        0.0229250 Otu00009     rf              AUC 2019</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10   0.4977625        0.0647375 Otu00010     rf              AUC 2019</span></span></code></pre></div>
 <p>There are several columns:</p>
 <ol style="list-style-type: decimal">
 <li><code>perf_metric</code>: The performance value of the permuted feature.</li>
@@ -426,13 +426,13 @@ div.csl-indent {
 <span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Feature importance complete.</span></span>
 <span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>results_imp_corr<span class="sc">$</span>feature_importance</span>
 <span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   perf_metric perf_metric_diff</span></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1   0.5992368       0.04813158</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1   0.5502105       0.09715789</span></span>
 <span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2   0.6369474       0.01042105</span></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3   0.5431579       0.10421053</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3   0.5951316       0.05223684</span></span>
 <span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                                     names</span></span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1                                                                Otu00008</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Otu00001|Otu00002|Otu00003|Otu00005|Otu00006|Otu00007|Otu00009|Otu00010</span></span>
 <span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2                                                                Otu00004</span></span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Otu00010|Otu00009|Otu00001|Otu00007|Otu00006|Otu00003|Otu00002|Otu00005</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3                                                                Otu00008</span></span>
 <span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   method perf_metric_name seed</span></span>
 <span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 glmnet              AUC 2019</span></span>
 <span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 glmnet              AUC 2019</span></span>
@@ -491,7 +491,7 @@ div.csl-indent {
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>The performance metrics are slightly different, but the format of everything else is the same:</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>results_multi<span class="sc">$</span>performance</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 x 17</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 17</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   cv_metric_logLoss logLoss   AUC prAUC Accuracy  Kappa Mean_F1 Mean_Sensitivity</span></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt;</span></span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1              1.07    1.11 0.506 0.353    0.382 0.0449 &lt;NA&gt;               0.360</span></span>
@@ -509,7 +509,7 @@ div.csl-indent {
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">seed =</span> <span class="dv">2019</span>)</span></code></pre></div>
 <p>Again, the performance metrics are slightly different, but the format of the rest is the same:</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>results_cont<span class="sc">$</span>performance</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 x 6</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 6</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   cv_metric_RMSE  RMSE Rsquared   MAE method  seed</span></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;</span></span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1           622.  731.   0.0893  472. glmnet  2019</span></span></code></pre></div>

@@ -43,6 +43,18 @@ results_custom <- run_ml(otu_mini_bin,
                          training_frac = 0.5,
                          seed = 2019)
 
+## ----custom_train_indices, warning=FALSE--------------------------------------
+n_obs <- otu_mini_bin %>% nrow()
+training_size <- 0.8 * n_obs
+training_rows <- sample(n_obs, training_size)
+results_custom_train <- run_ml(otu_mini_bin,
+                               'glmnet',
+                               kfold = 2,
+                               cv_times = 5,
+                               training_frac = training_rows,
+                               seed = 2019
+                               )
+
 ## ---- echo=FALSE--------------------------------------------------------------
 # TODO: can we get these programmatically somehow instead of hard-coding them?
 c("logLoss", "AUC", "prAUC", "Accuracy", "Kappa", "Mean_F1", "Mean_Sensitivity", "Mean_Specificity", "Mean_Pos_Pred_Value", "Mean_Neg_Pred_Value", "Mean_Precision", "Mean_Recall", "Mean_Detection_Rate", "Mean_Balanced_Accuracy")
@@ -60,16 +72,39 @@ results_pr <- run_ml(otu_mini_bin,
 ## -----------------------------------------------------------------------------
 results_pr$performance
 
-## ---- eval = FALSE------------------------------------------------------------
-#  # make random groups
-#  set.seed(2019)
-#  grps <- sample(LETTERS[1:8], nrow(otu_mini_bin),replace=TRUE)
-#  results_grp <- run_ml(otu_mini_bin,
-#                        'glmnet',
-#                        cv_times = 5,
-#                        training_frac = 0.8,
-#                        groups = grps,
-#                        seed = 2019)
+## ----custom_groups, warning=FALSE---------------------------------------------
+# make random groups
+set.seed(2019)
+grps <- sample(LETTERS[1:8], nrow(otu_mini_bin), replace=TRUE)
+results_grp <- run_ml(otu_mini_bin, 
+                      'glmnet', 
+                      cv_times = 2, 
+                      training_frac = 0.8, 
+                      groups = grps, 
+                      seed = 2019)
+
+## ----group_partitions, warning=FALSE------------------------------------------
+results_grp_part <- run_ml(otu_mini_bin, 
+                      'glmnet', 
+                      cv_times = 2, 
+                      training_frac = 0.8, 
+                      groups = grps, 
+                      group_partitions = list(train = c('A', 'B'),
+                                              test = c('C', 'D')
+                                              ),
+                      seed = 2019)
+
+## ----only_group_A_train, warning = FALSE--------------------------------------
+results_grp_trainA <- run_ml(otu_mini_bin, 
+                      'glmnet', 
+                      cv_times = 2, 
+                      kfold = 2,
+                      training_frac = 0.5, 
+                      groups = grps, 
+                      group_partitions = list(train = c("A", "B", "C", "D", "E", "F"),
+                                              test = c("A", "B", "C", "D", "E", "F", "G", "H")
+                                              ),
+                      seed = 2019)
 
 ## ---- eval = FALSE------------------------------------------------------------
 #  results_imp <- run_ml(otu_mini_bin,

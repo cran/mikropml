@@ -117,6 +117,7 @@ get_feature_importance(results$trained_model,
 
 # the function can show a progress bar if you have the progressr package installed
 ## optionally, specify the progress bar format
+
 progressr::handlers(progressr::handler_progress(
   format = ":message :bar :percent | elapsed: :elapsed | eta: :eta",
   clear = FALSE,

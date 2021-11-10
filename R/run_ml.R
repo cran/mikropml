@@ -24,10 +24,19 @@
 #' @param find_feature_importance Run permutation importance (default: `FALSE`).
 #'   `TRUE` is recommended if you would like to identify features important for
 #'   predicting your outcome, but it is resource-intensive.
+#' @param calculate_performance Whether to calculate performance metrics (default: `TRUE`).
+#'   You might choose to skip this if you do not perform cross-validation during model training.
 #' @param kfold Fold number for k-fold cross-validation (default: `5`).
 #' @param cv_times Number of cross-validation partitions to create (default: `100`).
-#' @param training_frac Fraction of data for training set (default: `0.8`).
-#'   The remaining data will be used in the testing set.
+#' @param cross_val a custom cross-validation scheme from `caret::trainControl()`
+#'   (default: `NULL`, uses `kfold` cross validation repeated `cv_times`).
+#'   `kfold` and `cv_times` are ignored if the user provides a custom cross-validation scheme.
+#'   See the `caret::trainControl()` docs for information on how to use it.
+#' @param training_frac Fraction of data for training set (default: `0.8`). Rows
+#'   from the dataset will be randomly selected for the training set, and all
+#'   remaining rows will be used in the testing set. Alternatively, if you
+#'   provide a vector of integers, these will be used as the row indices for the
+#'   training set. All remaining rows will be used in the testing set.
 #' @param perf_metric_function Function to calculate the performance metric to
 #'   be used for cross-validation and test performance. Some functions are
 #'   provided by caret (see [caret::defaultSummary()]).
@@ -41,12 +50,19 @@
 #'             regression = `"RMSE"`.
 #' @param groups Vector of groups to keep together when splitting the data into
 #'  train and test sets, and for cross-validation.
-#'  length matches the number of rows in the dataset (default: `NULL`).
+#'  Length matches the number of rows in the dataset (default: `NULL`).
+#' @param group_partitions Specify how to assign `groups` to the training and
+#'   testing partitions (default: `NULL`). If `groups` specifies that some
+#'   samples belong to group `"A"` and some belong to group `"B"`, then setting
+#'   `group_partitions = list(train = c("A", "B"), test = c("B"))` will result
+#'   in all samples from group `"A"` being placed in the training set, some
+#'   samples from `"B"` also in the training set, and the remaining samples from
+#'   `"B"` in the testing set. The partition sizes will be as close to
+#'   `training_frac` as possible.
 #' @param corr_thresh For feature importance, group correlations
 #'   above or equal to `corr_thresh` (range `0` to `1`; default: `1`).
-#' @param ntree For random forest, how many trees to use (default: 1000).
+#' @param ntree For random forest, how many trees to use (default: `1000`).
 #'   Note that caret doesn't allow this parameter to be tuned.
-#'
 #' @return
 #'
 #' Named list with results:
@@ -66,12 +82,26 @@
 #'
 #' @examples
 #' \dontrun{
+#'
+#' # regression
 #' run_ml(otu_small, "glmnet",
 #'   seed = 2019
 #' )
+#'
+#' # random forest w/ feature importance
 #' run_ml(otu_small, "rf",
 #'   outcome_colname = "dx",
 #'   find_feature_importance = TRUE
+#' )
+#'
+#' # custom cross validation & hyperparameters
+#' run_ml(otu_mini_bin[, 2:11],
+#'   "glmnet",
+#'   outcome_colname = "Otu00001",
+#'   seed = 2019,
+#'   hyperparameters = list(lambda = c(1e-04), alpha = 0),
+#'   cross_val = caret::trainControl(method = "none"),
+#'   calculate_performance = FALSE
 #' )
 #' }
 run_ml <-
@@ -80,12 +110,15 @@ run_ml <-
            outcome_colname = NULL,
            hyperparameters = NULL,
            find_feature_importance = FALSE,
+           calculate_performance = TRUE,
            kfold = 5,
            cv_times = 100,
+           cross_val = NULL,
            training_frac = 0.8,
            perf_metric_function = NULL,
            perf_metric_name = NULL,
            groups = NULL,
+           group_partitions = NULL,
            corr_thresh = 1,
            ntree = 1000,
            seed = NA) {
@@ -98,6 +131,7 @@ run_ml <-
       perf_metric_function,
       perf_metric_name,
       groups,
+      group_partitions,
       corr_thresh,
       ntree,
       seed
@@ -111,7 +145,7 @@ run_ml <-
     if (find_feature_importance) {
       abort_packages_not_installed("future.apply")
     }
-    # can't have categorical features for feature importance beause have to find correlations
+    # can't have categorical features for feature importance because have to find correlations
     outcome_colname <- check_outcome_column(dataset, outcome_colname)
     if (find_feature_importance) {
       check_cat_feats(dataset %>% dplyr::select(-outcome_colname))
@@ -120,10 +154,27 @@ run_ml <-
     dataset <- randomize_feature_order(dataset, outcome_colname)
 
     outcomes_vec <- dataset %>% dplyr::pull(outcome_colname)
-    training_inds <- get_partition_indices(outcomes_vec,
-      training_frac = training_frac,
-      groups = groups
-    )
+
+    if (length(training_frac) == 1) {
+      training_inds <- get_partition_indices(outcomes_vec,
+        training_frac = training_frac,
+        groups = groups,
+        group_partitions = group_partitions
+      )
+    } else {
+      training_inds <- training_frac
+      training_frac <- length(training_inds) / nrow(dataset)
+      message(
+        paste0(
+          "Using the custom training set indices provided by `training_frac`.
+      The fraction of data in the training set will be ",
+          round(training_frac, 2)
+        )
+      )
+    }
+    check_training_frac(training_frac)
+    check_training_indices(training_inds, dataset)
+
     train_data <- dataset[training_inds, ]
     test_data <- dataset[-training_inds, ]
     # train_groups & test_groups will be NULL if groups is NULL
@@ -147,15 +198,18 @@ run_ml <-
       perf_metric_name <- get_perf_metric_name(outcome_type)
     }
 
-    cv <- define_cv(train_data,
-      outcome_colname,
-      hyperparameters,
-      perf_metric_function,
-      class_probs,
-      kfold = kfold,
-      cv_times = cv_times,
-      groups = train_groups
-    )
+    if (is.null(cross_val)) {
+      cross_val <- define_cv(
+        train_data,
+        outcome_colname,
+        hyperparameters,
+        perf_metric_function,
+        class_probs,
+        kfold = kfold,
+        cv_times = cv_times,
+        groups = train_groups
+      )
+    }
 
     model_formula <- stats::as.formula(paste(outcome_colname, "~ ."))
     message("Training the model...")
@@ -163,7 +217,7 @@ run_ml <-
       model_formula,
       train_data,
       method,
-      cv,
+      cross_val,
       perf_metric_name,
       tune_grid,
       ntree
@@ -173,17 +227,21 @@ run_ml <-
       set.seed(seed)
     }
 
-    performance_tbl <- get_performance_tbl(
-      trained_model_caret,
-      test_data,
-      outcome_colname,
-      perf_metric_function,
-      perf_metric_name,
-      class_probs,
-      method,
-      seed
-    )
-    feature_importance_tbl <- "Skipped feature importance"
+    if (calculate_performance) {
+      performance_tbl <- get_performance_tbl(
+        trained_model_caret,
+        test_data,
+        outcome_colname,
+        perf_metric_function,
+        perf_metric_name,
+        class_probs,
+        method,
+        seed
+      )
+    } else {
+      performance_tbl <- "Skipped calculating performance"
+    }
+
     if (find_feature_importance) {
       message("Finding feature importance...")
       feature_importance_tbl <- get_feature_importance(
@@ -199,6 +257,8 @@ run_ml <-
         corr_thresh
       )
       message("Feature importance complete.")
+    } else {
+      feature_importance_tbl <- "Skipped feature importance"
     }
 
     return(

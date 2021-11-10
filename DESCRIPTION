@@ -1,7 +1,7 @@
 Package: mikropml
 Title: User-Friendly R Package for Supervised Machine Learning
         Pipelines
-Version: 1.1.1
+Version: 1.2.0
 Authors@R: c(
     person(given = "Begüm",
            family = "Topçuoğlu",
@@ -54,7 +54,7 @@ Authors@R: c(
            role = c("ctb"),
            email = "salucas@umich.edu",
            comment = c(ORCID = "0000-0003-1676-5801")))
-Date: 2021-09-13
+Date: 2021-11-10
 URL: https://www.schlosslab.org/mikropml/,
         https://github.com/SchlossLab/mikropml
 BugReports: https://github.com/SchlossLab/mikropml/issues
@@ -76,7 +76,7 @@ Suggests: doFuture, foreach, future, future.apply, ggplot2, knitr,
 VignetteBuilder: knitr
 Depends: R (>= 2.10)
 NeedsCompilation: no
-Packaged: 2021-09-13 18:31:03 UTC; kelly
+Packaged: 2021-11-10 18:08:53 UTC; kelly
 Author: Begüm Topçuoğlu [aut] (<https://orcid.org/0000-0003-3140-537X>),
   Zena Lapp [aut] (<https://orcid.org/0000-0003-4674-2176>),
   Kelly Sovacool [aut, cre] (<https://orcid.org/0000-0003-3283-829X>),
@@ -88,4 +88,4 @@ Author: Begüm Topçuoğlu [aut] (<https://orcid.org/0000-0003-3140-537X>),
   Sarah Lucas [ctb] (<https://orcid.org/0000-0003-1676-5801>)
 Maintainer: Kelly Sovacool <sovacool@umich.edu>
 Repository: CRAN
-Date/Publication: 2021-09-14 06:50:02 UTC
+Date/Publication: 2021-11-10 23:10:02 UTC

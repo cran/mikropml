@@ -394,8 +394,9 @@ div.csl-indent {
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Fraction of data in the training set: 0.795 </span></span>
 <span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Groups in the training set: A B D F G H </span></span>
 <span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Groups in the testing set: C E</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Training the model...</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Training complete.</span></span></code></pre></div>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Groups will be kept together in CV partitions</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Training the model...</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Training complete.</span></span></code></pre></div>
 <p>The one difference here is <code>run_ml()</code> will report how much of the data is in the training set if you run the above code chunk. This can be a little finicky depending on how many samples and groups you have. This is because it won’t be exactly what you specify with <code>training_frac</code>, since you have to include all of one group in either the training set <em>or</em> the test set.</p>
 <div id="controling-how-groups-are-assigned-to-partitions" class="section level3">
 <h3>Controling how groups are assigned to partitions</h3>
@@ -414,8 +415,9 @@ div.csl-indent {
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Fraction of data in the training set: 0.785 </span></span>
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Groups in the training set: A B E F G H </span></span>
 <span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Groups in the testing set: C D</span></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Training the model...</span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Training complete.</span></span></code></pre></div>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Groups will not be kept together in CV partitions because the number of groups in the training set is not larger than `kfold`</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Training the model...</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Training complete.</span></span></code></pre></div>
 <p>In the above case, all observations from A &amp; B will be used for training, all from C &amp; D will be used for testing, and the remaining groups will be randomly assigned to one or the other to satisfy the <code>training_frac</code> as closely as possible.</p>
 <p>In another scenario, maybe you want only groups A through F to be used for training, but you also want to allow other observations not selected for training from A through F to be used for testing:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>results_grp_trainA <span class="ot">&lt;-</span> <span class="fu">run_ml</span>(otu_mini_bin, </span>
@@ -432,8 +434,9 @@ div.csl-indent {
 <span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Fraction of data in the training set: 0.5 </span></span>
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Groups in the training set: A B C D E F </span></span>
 <span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Groups in the testing set: A B C D E F G H</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Training the model...</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Training complete.</span></span></code></pre></div>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Groups will be kept together in CV partitions</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Training the model...</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Training complete.</span></span></code></pre></div>
 <p>If you need even more control than this, take a look at <a href="#custom-training-indices">setting custom training indices</a>. You might also prefer to provide your own train control scheme with the <code>cross_val</code> parameter in <code>run_ml()</code>.</p>
 </div>
 </div>
@@ -450,21 +453,22 @@ div.csl-indent {
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>Now, we can check out the feature importances:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>results_imp<span class="sc">$</span>feature_importance</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    perf_metric perf_metric_diff    names method perf_metric_name seed</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    0.5542375        0.0082625 Otu00001     rf              AUC 2019</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    0.5731750       -0.0106750 Otu00002     rf              AUC 2019</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    0.5548750        0.0076250 Otu00003     rf              AUC 2019</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4    0.6414750       -0.0789750 Otu00004     rf              AUC 2019</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5    0.5049625        0.0575375 Otu00005     rf              AUC 2019</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6    0.5444500        0.0180500 Otu00006     rf              AUC 2019</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7    0.5417125        0.0207875 Otu00007     rf              AUC 2019</span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8    0.5257750        0.0367250 Otu00008     rf              AUC 2019</span></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9    0.5395750        0.0229250 Otu00009     rf              AUC 2019</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10   0.4977625        0.0647375 Otu00010     rf              AUC 2019</span></span></code></pre></div>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    perf_metric perf_metric_diff pvalue    names method perf_metric_name seed</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    0.5542375        0.0082625   0.37 Otu00001     rf              AUC 2019</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    0.5731750       -0.0106750   0.57 Otu00002     rf              AUC 2019</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    0.5548750        0.0076250   0.38 Otu00003     rf              AUC 2019</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4    0.6414750       -0.0789750   0.99 Otu00004     rf              AUC 2019</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5    0.5049625        0.0575375   0.05 Otu00005     rf              AUC 2019</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6    0.5444500        0.0180500   0.18 Otu00006     rf              AUC 2019</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7    0.5417125        0.0207875   0.21 Otu00007     rf              AUC 2019</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8    0.5257750        0.0367250   0.05 Otu00008     rf              AUC 2019</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9    0.5395750        0.0229250   0.02 Otu00009     rf              AUC 2019</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10   0.4977625        0.0647375   0.05 Otu00010     rf              AUC 2019</span></span></code></pre></div>
 <p>There are several columns:</p>
 <ol style="list-style-type: decimal">
 <li><code>perf_metric</code>: The performance value of the permuted feature.</li>
-<li><code>perf_metric_diff</code>: The difference between the performance for the true and permuted data (i.e. test performance minus permuted performance). Features with a larger <code>perf_metric_diff</code> are more important.</li>
+<li><code>perf_metric_diff</code>: The difference between the performance for the actual and permuted data (i.e. test performance minus permuted performance). Features with a larger <code>perf_metric_diff</code> are more important.</li>
+<li><code>pvalue</code>: the probability of obtaining the actual performance value under the null hypothesis.</li>
 <li><code>names</code>: The feature that was permuted.</li>
 <li><code>method</code>: The ML method used.</li>
 <li><code>perf_metric_name</code>: The peformance metric used.</li>
@@ -489,10 +493,10 @@ div.csl-indent {
 <span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Finding feature importance...</span></span>
 <span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Feature importance complete.</span></span>
 <span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>results_imp_corr<span class="sc">$</span>feature_importance</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   perf_metric perf_metric_diff</span></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1   0.5502105       0.09715789</span></span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2   0.6369474       0.01042105</span></span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3   0.5951316       0.05223684</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   perf_metric perf_metric_diff pvalue</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1   0.5502105       0.09715789   0.08</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2   0.6369474       0.01042105   0.40</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3   0.5951316       0.05223684   0.08</span></span>
 <span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                                     names</span></span>
 <span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Otu00001|Otu00002|Otu00003|Otu00005|Otu00006|Otu00007|Otu00009|Otu00010</span></span>
 <span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2                                                                Otu00004</span></span>

@@ -1,7 +1,7 @@
-6dded6846ad56515b542db6bb44b0a9a *DESCRIPTION
+a2a8b01e7207b0cd40a90d39b76caada *DESCRIPTION
 a36ce92070c05767db8837425ab606b2 *LICENSE
 65c3c920870f6032dec0d5bdbabbdbb1 *NAMESPACE
-148bd0470ef299d6ededebae54ebb9c9 *NEWS.md
+2eead17f722444578b5809c33f0d337d *NEWS.md
 6f94cc902ad8d16e8c8aff31d77c6ba3 *R/checks.R
 77801d23d69aa6fa024b705a1e7cb8fa *R/corr_feats.R
 c92d43f7172372b4d18a48b6341a6c24 *R/cross_val.R
@@ -17,7 +17,7 @@ e82ab864a37b56ebb22eb65caadb60f8 *R/preprocess_data.R
 76ca2ee609d4cdab96d195d2f5d8479c *R/train_model.R
 6aa712a222400b5150032fdcbbb05fca *R/utils.R
 6799e5234413528e75d29bc2f8ccd75b *README.md
-6cb3f030e2cfd5ccf22fa2fc9c6f2b3f *build/partial.rdb
+234e780c6034b35ba9e1a97503297eb0 *build/partial.rdb
 3ba7d03d2136f56fe193cd1755853af6 *build/vignette.rds
 4fc6cafea9e765db8f6ec23e39ca0627 *data/otu_mini_bin.rda
 4e498bc664370b9c1ac9babcdf8642a3 *data/otu_mini_bin_results_glmnet.rda
@@ -82,7 +82,7 @@ af123f7c58b936b046b72e9cea30c054 *tests/testthat.R
 6ba73ed2867b03d8af6f58c644c25f27 *tests/testthat/test-checks.R
 4eecf92e0fa989baecd522b60a3bde40 *tests/testthat/test-corr_feats.R
 0589190965790425105484bc84335e6d *tests/testthat/test-cross_val.R
-5e7c5b24841a6f1e94006349a44946d6 *tests/testthat/test-feature_importance.R
+9aa0d0c014b9ed97d11914984147a2e1 *tests/testthat/test-feature_importance.R
 630bbdf95c2c578560896dd320f63a5c *tests/testthat/test-hyperparameters.R
 c261bb9f0d59f6b0a9fe4016a01c48e0 *tests/testthat/test-partition.R
 e95c2e34448e4b2d6046531d22bd0b02 *tests/testthat/test-performance_metrics.R

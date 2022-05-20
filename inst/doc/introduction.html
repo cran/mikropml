@@ -15,7 +15,19 @@
 
 <title>Introduction to mikropml</title>
 
-<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -25,6 +37,7 @@
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
     </style>
+
 
 
 <style type="text/css">
@@ -148,7 +161,187 @@ div.csl-indent {
 }
 </style>
 
-<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
 
 
 
@@ -165,11 +358,20 @@ div.csl-indent {
 
 
 
-<p>The goal of <code>mikropml</code> is to make supervised machine learning (ML) easy for you to run while implementing good practices for machine learning pipelines. All you need to run the ML pipeline is one function: <code>run_ml()</code>. We’ve selected sensible default arguments related to good practices <span class="citation">(Topçuoğlu et al. 2020; Tang et al. 2020)</span>, but we allow you to change those arguments to tailor <code>run_ml()</code> to the needs of your data.</p>
-<p>This document takes you through all of the <code>run_ml()</code> inputs, both required and optional, as well as the outputs.</p>
+<p>The goal of <code>mikropml</code> is to make supervised machine
+learning (ML) easy for you to run while implementing good practices for
+machine learning pipelines. All you need to run the ML pipeline is one
+function: <code>run_ml()</code>. We’ve selected sensible default
+arguments related to good practices <span class="citation">(Topçuoğlu et
+al. 2020; Tang et al. 2020)</span>, but we allow you to change those
+arguments to tailor <code>run_ml()</code> to the needs of your data.</p>
+<p>This document takes you through all of the <code>run_ml()</code>
+inputs, both required and optional, as well as the outputs.</p>
 <p>In summary, you provide:</p>
 <ul>
-<li>A dataset with an outcome column and feature columns (rows are samples; unfortunately we do not support multi-label classification)</li>
+<li>A dataset with an outcome column and feature columns (rows are
+samples; unfortunately we do not support multi-label
+classification)</li>
 <li>Model choice (i.e. method)</li>
 </ul>
 <p>And the function outputs:</p>
@@ -180,13 +382,20 @@ div.csl-indent {
 </ul>
 <div id="its-running-so-slow" class="section level1">
 <h1>It’s running so slow!</h1>
-<p>Since I assume a lot of you won’t read this entire vignette, I’m going to say this at the beginning. If the <code>run_ml()</code> function is running super slow, you should consider parallelizing. See <code>vignette(&quot;parallel&quot;)</code> for examples.</p>
+<p>Since I assume a lot of you won’t read this entire vignette, I’m
+going to say this at the beginning. If the <code>run_ml()</code>
+function is running super slow, you should consider parallelizing. See
+<code>vignette(&quot;parallel&quot;)</code> for examples.</p>
 </div>
 <div id="understanding-the-inputs" class="section level1">
 <h1>Understanding the inputs</h1>
 <div id="the-input-data" class="section level2">
 <h2>The input data</h2>
-<p>The input data to <code>run_ml()</code> is a dataframe where each row is a sample or observation. One column (assumed to be the first) is the outcome of interest, and all of the other columns are the features. We package <code>otu_mini_bin</code> as a small example dataset with <code>mikropml</code>.</p>
+<p>The input data to <code>run_ml()</code> is a dataframe where each row
+is a sample or observation. One column (assumed to be the first) is the
+outcome of interest, and all of the other columns are the features. We
+package <code>otu_mini_bin</code> as a small example dataset with
+<code>mikropml</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;devtools&quot;)</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#devtools::install_github(&quot;SchlossLab/mikropml&quot;)</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mikropml)</span>
@@ -205,60 +414,112 @@ div.csl-indent {
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4       78      255      197</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5        1      537      533</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6      251      155      122</span></span></code></pre></div>
-<p>Here, <code>dx</code> is the outcome column (normal or cancer), and there are 10 features (<code>Otu00001</code> through <code>Otu00010</code>). Because there are only 2 outcomes, we will be performing binary classification in the majority of the examples below. At the bottom, we will also briefly provide examples of multi-class and continuous outcomes. As you’ll see, you run them in the same way as for binary classification!</p>
-<p>The feature columns are the amount of each <a href="https://en.wikipedia.org/wiki/Operational_taxonomic_unit">Operational Taxonomic Unit (OTU)</a> in microbiome samples from patients with cancer and without cancer. The goal is to predict <code>dx</code>, which stands for diagnosis. This diagnosis can be cancer or not based on an individual’s microbiome. No need to understand exactly what that means, but if you’re interested you can read more about it from the original paper <span class="citation">(Topçuoğlu et al. 2020)</span>.</p>
-<p>For real machine learning applications you’ll need to use more features, but for the purposes of this vignette we’ll stick with this example dataset so everything runs faster.</p>
+<p>Here, <code>dx</code> is the outcome column (normal or cancer), and
+there are 10 features (<code>Otu00001</code> through
+<code>Otu00010</code>). Because there are only 2 outcomes, we will be
+performing binary classification in the majority of the examples below.
+At the bottom, we will also briefly provide examples of multi-class and
+continuous outcomes. As you’ll see, you run them in the same way as for
+binary classification!</p>
+<p>The feature columns are the amount of each <a href="https://en.wikipedia.org/wiki/Operational_taxonomic_unit">Operational
+Taxonomic Unit (OTU)</a> in microbiome samples from patients with cancer
+and without cancer. The goal is to predict <code>dx</code>, which stands
+for diagnosis. This diagnosis can be cancer or not based on an
+individual’s microbiome. No need to understand exactly what that means,
+but if you’re interested you can read more about it from the original
+paper <span class="citation">(Topçuoğlu et al. 2020)</span>.</p>
+<p>For real machine learning applications you’ll need to use more
+features, but for the purposes of this vignette we’ll stick with this
+example dataset so everything runs faster.</p>
 </div>
 <div id="the-methods-we-support" class="section level2">
 <h2>The methods we support</h2>
-<p>All of the methods we use are supported by a great ML wrapper package <a href="https://topepo.github.io/caret/"><code>caret</code></a>, which we use to train our machine learning models.</p>
+<p>All of the methods we use are supported by a great ML wrapper package
+<a href="https://topepo.github.io/caret/"><code>caret</code></a>, which
+we use to train our machine learning models.</p>
 <p>The methods we have tested (and their backend packages) are:</p>
 <ul>
 <li>Logistic/multiclass/linear regression (<code>&quot;glmnet&quot;</code>)</li>
 <li>Random forest (<code>&quot;rf&quot;</code>)</li>
 <li>Decision tree (<code>&quot;rpart2&quot;</code>)</li>
-<li>Support vector machine with a radial basis kernel (<code>&quot;svmRadial&quot;</code>)</li>
+<li>Support vector machine with a radial basis kernel
+(<code>&quot;svmRadial&quot;</code>)</li>
 <li>xgboost (<code>&quot;xgbTree&quot;</code>)</li>
 </ul>
-<p>For documentation on these methods, as well as many others, you can look at the <a href="https://topepo.github.io/caret/available-models.html">available models</a> (or see <a href="https://topepo.github.io/caret/train-models-by-tag.html">here</a> for a list by tag). While we have not vetted the other models used by <code>caret</code>, our function is general enough that others might work. While we can’t promise that we can help with other models, feel free to <a href="https://github.com/SchlossLab/mikropml/issues">open an issue on GitHub</a> if you have questions about other models and we <em>might</em> be able to help.</p>
-<p>We will first focus on <code>glmnet</code>, which is our default implementation of L2-regularized logistic regression. Then we will cover a few other examples towards the end.</p>
+<p>For documentation on these methods, as well as many others, you can
+look at the <a href="https://topepo.github.io/caret/available-models.html">available
+models</a> (or see <a href="https://topepo.github.io/caret/train-models-by-tag.html">here</a>
+for a list by tag). While we have not vetted the other models used by
+<code>caret</code>, our function is general enough that others might
+work. While we can’t promise that we can help with other models, feel
+free to <a href="https://github.com/SchlossLab/mikropml/issues">open an
+issue on GitHub</a> if you have questions about other models and we
+<em>might</em> be able to help.</p>
+<p>We will first focus on <code>glmnet</code>, which is our default
+implementation of L2-regularized logistic regression. Then we will cover
+a few other examples towards the end.</p>
 </div>
 </div>
 <div id="before-running-ml" class="section level1">
 <h1>Before running ML</h1>
-<p>Before you execute <code>run_ml()</code>, you should consider preprocessing your data, either on your own or with the <code>preprocess_data()</code> function. You can learn more about this in the preprocessing vignette: <code>vignette(&quot;preprocess&quot;)</code>.</p>
+<p>Before you execute <code>run_ml()</code>, you should consider
+preprocessing your data, either on your own or with the
+<code>preprocess_data()</code> function. You can learn more about this
+in the preprocessing vignette: <code>vignette(&quot;preprocess&quot;)</code>.</p>
 </div>
 <div id="the-simplest-way-to-run_ml" class="section level1">
 <h1>The simplest way to <code>run_ml()</code></h1>
-<p>As mentioned above, the minimal input is your dataset (<code>dataset</code>) and the machine learning model you want to use (<code>method</code>).</p>
+<p>As mentioned above, the minimal input is your dataset
+(<code>dataset</code>) and the machine learning model you want to use
+(<code>method</code>).</p>
 <p>You may also want to provide:</p>
 <ul>
-<li>The outcome column name. By default <code>run_ml()</code> will pick the first column, but it’s best practice to specify the column name explicitly.</li>
-<li>A seed so that the results will be reproducible, and so that you get the same results as those you see here (i.e have the same train/test split).</li>
+<li>The outcome column name. By default <code>run_ml()</code> will pick
+the first column, but it’s best practice to specify the column name
+explicitly.</li>
+<li>A seed so that the results will be reproducible, and so that you get
+the same results as those you see here (i.e have the same train/test
+split).</li>
 </ul>
-<p>Say we want to use logistic regression, then the method we will use is <code>glmnet</code>. To do so, run the ML pipeline with:</p>
+<p>Say we want to use logistic regression, then the method we will use
+is <code>glmnet</code>. To do so, run the ML pipeline with:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">run_ml</span>(otu_mini_bin,</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&#39;glmnet&#39;</span>,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">outcome_colname =</span> <span class="st">&#39;dx&#39;</span>,</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">seed =</span> <span class="dv">2019</span>)</span></code></pre></div>
 <p>You’ll notice a few things:</p>
 <ol style="list-style-type: decimal">
-<li>It takes a little while to run. This is because of some of the parameters we use.</li>
-<li>There is a message stating that ‘dx’ is being used as the outcome column. This is what we want, but it’s a nice sanity check!</li>
-<li>There was a warning. Don’t worry about this warning right now - it just means that some of the hyperparameters aren’t a good fit - but if you’re interested in learning more, see <code>vignette(&quot;tuning&quot;)</code>.</li>
+<li>It takes a little while to run. This is because of some of the
+parameters we use.</li>
+<li>There is a message stating that ‘dx’ is being used as the outcome
+column. This is what we want, but it’s a nice sanity check!</li>
+<li>There was a warning. Don’t worry about this warning right now - it
+just means that some of the hyperparameters aren’t a good fit - but if
+you’re interested in learning more, see
+<code>vignette(&quot;tuning&quot;)</code>.</li>
 </ol>
-<p>Now, let’s dig into the output a bit. The results is a list of 4 things:</p>
+<p>Now, let’s dig into the output a bit. The results is a list of 4
+things:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(results)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;trained_model&quot;      &quot;test_data&quot;          &quot;performance&quot;       </span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4] &quot;feature_importance&quot;</span></span></code></pre></div>
-<p><code>trained_model</code> is the trained model from <code>caret</code>. There is a bunch of info in this that we won’t get into, because you can learn more from the <code>caret::train()</code> documentation.</p>
+<p><code>trained_model</code> is the trained model from
+<code>caret</code>. There is a bunch of info in this that we won’t get
+into, because you can learn more from the <code>caret::train()</code>
+documentation.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(results<span class="sc">$</span>trained_model)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] &quot;method&quot;       &quot;modelInfo&quot;    &quot;modelType&quot;    &quot;results&quot;      &quot;pred&quot;        </span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [6] &quot;bestTune&quot;     &quot;call&quot;         &quot;dots&quot;         &quot;metric&quot;       &quot;control&quot;     </span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [11] &quot;finalModel&quot;   &quot;preProcess&quot;   &quot;trainingData&quot; &quot;resample&quot;     &quot;resampledCM&quot; </span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [16] &quot;perfNames&quot;    &quot;maximize&quot;     &quot;yLimits&quot;      &quot;times&quot;        &quot;levels&quot;      </span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [21] &quot;terms&quot;        &quot;coefnames&quot;    &quot;xlevels&quot;</span></span></code></pre></div>
-<p><code>test_data</code> is the partition of the dataset that was used for testing. In machine learning, it’s always important to have a held-out test dataset that is not used in the training stage. In this pipeline we do that using <code>run_ml()</code> where we split your data into training and testing sets. The training data are used to build the model (e.g. tune hyperparameters, learn the data) and the test data are used to evaluate how well the model performs.</p>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [11] &quot;finalModel&quot;   &quot;preProcess&quot;   &quot;trainingData&quot; &quot;ptype&quot;        &quot;resample&quot;    </span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [16] &quot;resampledCM&quot;  &quot;perfNames&quot;    &quot;maximize&quot;     &quot;yLimits&quot;      &quot;times&quot;       </span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [21] &quot;levels&quot;       &quot;terms&quot;        &quot;coefnames&quot;    &quot;xlevels&quot;</span></span></code></pre></div>
+<p><code>test_data</code> is the partition of the dataset that was used
+for testing. In machine learning, it’s always important to have a
+held-out test dataset that is not used in the training stage. In this
+pipeline we do that using <code>run_ml()</code> where we split your data
+into training and testing sets. The training data are used to build the
+model (e.g. tune hyperparameters, learn the data) and the test data are
+used to evaluate how well the model performs.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(results<span class="sc">$</span>test_data)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        dx Otu00009 Otu00005 Otu00010 Otu00001 Otu00008 Otu00004 Otu00003</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9  normal      119      142      248      256      363      112      871</span></span>
@@ -274,7 +535,10 @@ div.csl-indent {
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17      357      253      341</span></span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 27       25      322        5</span></span>
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 30      179        6       30</span></span></code></pre></div>
-<p><code>performance</code> is a dataframe of (mainly) performance metrics (1 column for cross-validation performance metric, several for test performance metrics, and 2 columns at the end with ML method and seed):</p>
+<p><code>performance</code> is a dataframe of (mainly) performance
+metrics (1 column for cross-validation performance metric, several for
+test performance metrics, and 2 columns at the end with ML method and
+seed):</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>results<span class="sc">$</span>performance</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 17</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   cv_metric_AUC logLoss   AUC prAUC Accuracy Kappa    F1 Sensitivity Specificity</span></span>
@@ -283,23 +547,52 @@ div.csl-indent {
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 8 more variables: Pos_Pred_Value &lt;dbl&gt;, Neg_Pred_Value &lt;dbl&gt;,</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Precision &lt;dbl&gt;, Recall &lt;dbl&gt;, Detection_Rate &lt;dbl&gt;,</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Balanced_Accuracy &lt;dbl&gt;, method &lt;chr&gt;, seed &lt;dbl&gt;</span></span></code></pre></div>
-<p>When using logistic regression for binary classification, area under the receiver-operator characteristic curve (AUC) is a useful metric to evaluate model performance. Because of that, it’s the default that we use for <code>mikropml</code>. However, it is crucial to evaluate your model performance using multiple metrics. Below you can find more information about other performance metrics and how to use them in our package.</p>
-<p><code>cv_metric_AUC</code> is the AUC for the cross-validation folds for the training data. This gives us a sense of how well the model performs on the training data.</p>
-<p>Most of the other columns are performance metrics for the test data — the data that wasn’t used to build the model. Here, you can see that the AUC for the test data is not much above 0.5, suggesting that this model does not predict much better than chance, and that the model is overfit because the cross-validation AUC (<code>cv_metric_AUC</code>, measured during training) is much higher than the testing AUC. This isn’t too surprising since we’re using so few features with this example dataset, so don’t be discouraged. The default option also provides a number of other performance metrics that you might be interested in, including area under the precision-recall curve (prAUC).</p>
-<p>The last columns of <code>results$performance</code> are the method and seed (if you set one) to help with combining results from multiple runs (see <code>vignette(&quot;parallel&quot;)</code>).</p>
-<p><code>feature_importance</code> has information about feature importance values if <code>find_feature_importance = TRUE</code> (the default is <code>FALSE</code>). Since we used the defaults, there’s nothing here:</p>
+<p>When using logistic regression for binary classification, area under
+the receiver-operator characteristic curve (AUC) is a useful metric to
+evaluate model performance. Because of that, it’s the default that we
+use for <code>mikropml</code>. However, it is crucial to evaluate your
+model performance using multiple metrics. Below you can find more
+information about other performance metrics and how to use them in our
+package.</p>
+<p><code>cv_metric_AUC</code> is the AUC for the cross-validation folds
+for the training data. This gives us a sense of how well the model
+performs on the training data.</p>
+<p>Most of the other columns are performance metrics for the test data —
+the data that wasn’t used to build the model. Here, you can see that the
+AUC for the test data is not much above 0.5, suggesting that this model
+does not predict much better than chance, and that the model is overfit
+because the cross-validation AUC (<code>cv_metric_AUC</code>, measured
+during training) is much higher than the testing AUC. This isn’t too
+surprising since we’re using so few features with this example dataset,
+so don’t be discouraged. The default option also provides a number of
+other performance metrics that you might be interested in, including
+area under the precision-recall curve (prAUC).</p>
+<p>The last columns of <code>results$performance</code> are the method
+and seed (if you set one) to help with combining results from multiple
+runs (see <code>vignette(&quot;parallel&quot;)</code>).</p>
+<p><code>feature_importance</code> has information about feature
+importance values if <code>find_feature_importance = TRUE</code> (the
+default is <code>FALSE</code>). Since we used the defaults, there’s
+nothing here:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>results<span class="sc">$</span>feature_importance</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Skipped feature importance&quot;</span></span></code></pre></div>
 </div>
 <div id="customizing-parameters" class="section level1">
 <h1>Customizing parameters</h1>
-<p>There are a few arguments that allow you to change how you execute <code>run_ml()</code>. We’ve chosen reasonable defaults for you, but we encourage you to change these if you think something else would be better for your data.</p>
+<p>There are a few arguments that allow you to change how you execute
+<code>run_ml()</code>. We’ve chosen reasonable defaults for you, but we
+encourage you to change these if you think something else would be
+better for your data.</p>
 <div id="changing-kfold-cv_times-and-training_frac" class="section level2">
-<h2>Changing <code>kfold</code>, <code>cv_times</code>, and <code>training_frac</code></h2>
+<h2>Changing <code>kfold</code>, <code>cv_times</code>, and
+<code>training_frac</code></h2>
 <ul>
-<li><code>kfold</code>: The number of folds to run for cross-validation (default: 5).</li>
-<li><code>cv_times</code>: The number of times to run repeated cross-validation (default: 100).</li>
-<li><code>training_frac</code>: The fraction of data for the training set (default: 0.8). The rest of the data is used for testing.</li>
+<li><code>kfold</code>: The number of folds to run for cross-validation
+(default: 5).</li>
+<li><code>cv_times</code>: The number of times to run repeated
+cross-validation (default: 100).</li>
+<li><code>training_frac</code>: The fraction of data for the training
+set (default: 0.8). The rest of the data is used for testing.</li>
 </ul>
 <p>Here’s an example where we change some of the default parameters:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>results_custom <span class="ot">&lt;-</span> <span class="fu">run_ml</span>(otu_mini_bin,</span>
@@ -312,16 +605,31 @@ div.csl-indent {
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Training the model...</span></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Loading required package: ggplot2</span></span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Loading required package: lattice</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in (function (w) : `caret::train()` issued the following warning:</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  </span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; simpleWarning in nominalTrainWorkflow(x = x, y = y, wts = weights, info = trainInfo, : There were missing values in resampled performance measures.</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Attaching package: &#39;caret&#39;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The following object is masked from &#39;package:mikropml&#39;:</span></span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; This warning usually means that the model didn&#39;t converge in some cross-validation folds because it is predicting something close to a constant. As a result, certain performance metrics can&#39;t be calculated. This suggests that some of the hyperparameters chosen are doing very poorly.</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Training complete.</span></span></code></pre></div>
-<p>You might have noticed that this one ran faster — that’s because we reduced <code>kfold</code> and <code>cv_times</code>. This is okay for testing things out and may even be necessary for smaller datasets. But in general it may be better to have larger numbers for these parameters; we think the defaults are a good starting point <span class="citation">(Topçuoğlu et al. 2020)</span>.</p>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     compare_models</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in (function (w) : `caret::train()` issued the following warning:</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  </span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; simpleWarning in nominalTrainWorkflow(x = x, y = y, wts = weights, info = trainInfo, : There were missing values in resampled performance measures.</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; This warning usually means that the model didn&#39;t converge in some cross-validation folds because it is predicting something close to a constant. As a result, certain performance metrics can&#39;t be calculated. This suggests that some of the hyperparameters chosen are doing very poorly.</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Training complete.</span></span></code></pre></div>
+<p>You might have noticed that this one ran faster — that’s because we
+reduced <code>kfold</code> and <code>cv_times</code>. This is okay for
+testing things out and may even be necessary for smaller datasets. But
+in general it may be better to have larger numbers for these parameters;
+we think the defaults are a good starting point <span class="citation">(Topçuoğlu et al. 2020)</span>.</p>
 <div id="custom-training-indices" class="section level3">
 <h3>Custom training indices</h3>
-<p>When <code>training_frac</code> is a fraction between 0 and 1, a random sample of observations in the dataset are chosen for the training set to satisfy the <code>training_frac</code>. However, in some cases you might wish to control exactly which observations are in the training set. You can instead assign <code>training_frac</code> a vector of indices that correspond to which rows of the dataset should go in the training set (all remaining sequences will go in the testing set).</p>
+<p>When <code>training_frac</code> is a fraction between 0 and 1, a
+random sample of observations in the dataset are chosen for the training
+set to satisfy the <code>training_frac</code>. However, in some cases
+you might wish to control exactly which observations are in the training
+set. You can instead assign <code>training_frac</code> a vector of
+indices that correspond to which rows of the dataset should go in the
+training set (all remaining sequences will go in the testing set).</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>n_obs <span class="ot">&lt;-</span> otu_mini_bin <span class="sc">%&gt;%</span> <span class="fu">nrow</span>()</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>training_size <span class="ot">&lt;-</span> <span class="fl">0.8</span> <span class="sc">*</span> n_obs</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>training_rows <span class="ot">&lt;-</span> <span class="fu">sample</span>(n_obs, training_size)</span>
@@ -341,10 +649,20 @@ div.csl-indent {
 </div>
 <div id="changing-the-performance-metric" class="section level2">
 <h2>Changing the performance metric</h2>
-<p>There are two arguments that allow you to change what performance metric to use for model evaluation, and what performance metrics to calculate using the test data.</p>
-<p><code>perf_metric_function</code> is the function used to calculate the performance metrics.</p>
-<p>The default for classification is <code>caret::multiClassSummary()</code> and the default for regression is <code>caret::defaultSummary()</code>. We’d suggest not changing this unless you really know what you’re doing.</p>
-<p><code>perf_metric_name</code> is the column name from the output of <code>perf_metric_function</code>. We chose reasonable defaults (AUC for binary, logLoss for multiclass, and RMSE for continuous), but the default functions calculate a bunch of different performance metrics, so you can choose a different one if you’d like.</p>
+<p>There are two arguments that allow you to change what performance
+metric to use for model evaluation, and what performance metrics to
+calculate using the test data.</p>
+<p><code>perf_metric_function</code> is the function used to calculate
+the performance metrics.</p>
+<p>The default for classification is
+<code>caret::multiClassSummary()</code> and the default for regression
+is <code>caret::defaultSummary()</code>. We’d suggest not changing this
+unless you really know what you’re doing.</p>
+<p><code>perf_metric_name</code> is the column name from the output of
+<code>perf_metric_function</code>. We chose reasonable defaults (AUC for
+binary, logLoss for multiclass, and RMSE for continuous), but the
+default functions calculate a bunch of different performance metrics, so
+you can choose a different one if you’d like.</p>
 <p>The default performance metrics available for classification are:</p>
 <pre><code>#&gt;  [1] &quot;logLoss&quot;                &quot;AUC&quot;                    &quot;prAUC&quot;                 
 #&gt;  [4] &quot;Accuracy&quot;               &quot;Kappa&quot;                  &quot;Mean_F1&quot;               
@@ -367,7 +685,8 @@ div.csl-indent {
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; This warning usually means that the model didn&#39;t converge in some cross-validation folds because it is predicting something close to a constant. As a result, certain performance metrics can&#39;t be calculated. This suggests that some of the hyperparameters chosen are doing very poorly.</span></span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Training complete.</span></span></code></pre></div>
-<p>You’ll see that the cross-validation metric is prAUC, instead of the default AUC:</p>
+<p>You’ll see that the cross-validation metric is prAUC, instead of the
+default AUC:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>results_pr<span class="sc">$</span>performance</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 17</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   cv_metric_prAUC logLoss   AUC prAUC Accuracy  Kappa    F1 Sensitivity</span></span>
@@ -379,8 +698,16 @@ div.csl-indent {
 </div>
 <div id="using-groups" class="section level2">
 <h2>Using groups</h2>
-<p>The optional <code>groups</code> is a vector of groups to keep together when splitting the data into train and test sets and for cross-validation. Sometimes it’s important to split up the data based on a grouping instead of just randomly. This allows you to control for similarities within groups that you don’t want to skew your predictions (i.e. batch effects). For example, with biological data you may have samples collected from multiple hospitals, and you might like to keep observations from the same hospital in the same partition.</p>
-<p>Here’s an example where we split the data into train/test sets based on groups:</p>
+<p>The optional <code>groups</code> is a vector of groups to keep
+together when splitting the data into train and test sets and for
+cross-validation. Sometimes it’s important to split up the data based on
+a grouping instead of just randomly. This allows you to control for
+similarities within groups that you don’t want to skew your predictions
+(i.e. batch effects). For example, with biological data you may have
+samples collected from multiple hospitals, and you might like to keep
+observations from the same hospital in the same partition.</p>
+<p>Here’s an example where we split the data into train/test sets based
+on groups:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make random groups</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2019</span>)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>grps <span class="ot">&lt;-</span> <span class="fu">sample</span>(LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>], <span class="fu">nrow</span>(otu_mini_bin), <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
@@ -397,11 +724,27 @@ div.csl-indent {
 <span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Groups will be kept together in CV partitions</span></span>
 <span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Training the model...</span></span>
 <span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Training complete.</span></span></code></pre></div>
-<p>The one difference here is <code>run_ml()</code> will report how much of the data is in the training set if you run the above code chunk. This can be a little finicky depending on how many samples and groups you have. This is because it won’t be exactly what you specify with <code>training_frac</code>, since you have to include all of one group in either the training set <em>or</em> the test set.</p>
-<div id="controling-how-groups-are-assigned-to-partitions" class="section level3">
-<h3>Controling how groups are assigned to partitions</h3>
-<p>When you use the <code>groups</code> parameter as above, by default <code>run_ml()</code> will assume that you want all of the observations from each group to be placed in the same partition of the train/test split. This makes sense when you want to use groups to control for batch effects. However, in some cases you might prefer to control exactly which groups end up in which partition, and you might even be okay with some observations from the same group being assigned to different partitions.</p>
-<p>For example, say you want groups A and B to be used for training, C and D for testing, and you don’t have a preference for what happens to the other groups. You can give the <code>group_partitions</code> parameter a named list to specify which groups should go in the training set and which should go in the testing set.</p>
+<p>The one difference here is <code>run_ml()</code> will report how much
+of the data is in the training set if you run the above code chunk. This
+can be a little finicky depending on how many samples and groups you
+have. This is because it won’t be exactly what you specify with
+<code>training_frac</code>, since you have to include all of one group
+in either the training set <em>or</em> the test set.</p>
+<div id="controlling-how-groups-are-assigned-to-partitions" class="section level3">
+<h3>Controlling how groups are assigned to partitions</h3>
+<p>When you use the <code>groups</code> parameter as above, by default
+<code>run_ml()</code> will assume that you want all of the observations
+from each group to be placed in the same partition of the train/test
+split. This makes sense when you want to use groups to control for batch
+effects. However, in some cases you might prefer to control exactly
+which groups end up in which partition, and you might even be okay with
+some observations from the same group being assigned to different
+partitions.</p>
+<p>For example, say you want groups A and B to be used for training, C
+and D for testing, and you don’t have a preference for what happens to
+the other groups. You can give the <code>group_partitions</code>
+parameter a named list to specify which groups should go in the training
+set and which should go in the testing set.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>results_grp_part <span class="ot">&lt;-</span> <span class="fu">run_ml</span>(otu_mini_bin, </span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&#39;glmnet&#39;</span>, </span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">cv_times =</span> <span class="dv">2</span>, </span>
@@ -418,8 +761,13 @@ div.csl-indent {
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Groups will not be kept together in CV partitions because the number of groups in the training set is not larger than `kfold`</span></span>
 <span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Training the model...</span></span>
 <span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Training complete.</span></span></code></pre></div>
-<p>In the above case, all observations from A &amp; B will be used for training, all from C &amp; D will be used for testing, and the remaining groups will be randomly assigned to one or the other to satisfy the <code>training_frac</code> as closely as possible.</p>
-<p>In another scenario, maybe you want only groups A through F to be used for training, but you also want to allow other observations not selected for training from A through F to be used for testing:</p>
+<p>In the above case, all observations from A &amp; B will be used for
+training, all from C &amp; D will be used for testing, and the remaining
+groups will be randomly assigned to one or the other to satisfy the
+<code>training_frac</code> as closely as possible.</p>
+<p>In another scenario, maybe you want only groups A through F to be
+used for training, but you also want to allow other observations not
+selected for training from A through F to be used for testing:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>results_grp_trainA <span class="ot">&lt;-</span> <span class="fu">run_ml</span>(otu_mini_bin, </span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&#39;glmnet&#39;</span>, </span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">cv_times =</span> <span class="dv">2</span>, </span>
@@ -437,13 +785,23 @@ div.csl-indent {
 <span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Groups will be kept together in CV partitions</span></span>
 <span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Training the model...</span></span>
 <span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Training complete.</span></span></code></pre></div>
-<p>If you need even more control than this, take a look at <a href="#custom-training-indices">setting custom training indices</a>. You might also prefer to provide your own train control scheme with the <code>cross_val</code> parameter in <code>run_ml()</code>.</p>
+<p>If you need even more control than this, take a look at <a href="#custom-training-indices">setting custom training indices</a>. You
+might also prefer to provide your own train control scheme with the
+<code>cross_val</code> parameter in <code>run_ml()</code>.</p>
 </div>
 </div>
 </div>
 <div id="finding-feature-importance" class="section level1">
 <h1>Finding feature importance</h1>
-<p>To find which features are contributing to predictive power, you can use <code>find_feature_importance = TRUE</code>. How we use permutation importance to determine feature importance is described in <span class="citation">(Topçuoğlu et al. 2020)</span>. Briefly, it permutes each of the features individually (or correlated ones together) and evaluates how much the performance metric decreases. The more performance decreases when the feature is randomly shuffled, the more important that feature is. The default is <code>FALSE</code> because it takes a while to run and is only useful if you want to know what features are important in predicting your outcome.</p>
+<p>To find which features are contributing to predictive power, you can
+use <code>find_feature_importance = TRUE</code>. How we use permutation
+importance to determine feature importance is described in <span class="citation">(Topçuoğlu et al. 2020)</span>. Briefly, it permutes
+each of the features individually (or correlated ones together) and
+evaluates how much the performance metric decreases. The more
+performance decreases when the feature is randomly shuffled, the more
+important that feature is. The default is <code>FALSE</code> because it
+takes a while to run and is only useful if you want to know what
+features are important in predicting your outcome.</p>
 <p>Let’s look at some feature importance results:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>results_imp <span class="ot">&lt;-</span> <span class="fu">run_ml</span>(otu_mini_bin,</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;rf&quot;</span>,</span>
@@ -453,29 +811,52 @@ div.csl-indent {
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>Now, we can check out the feature importances:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>results_imp<span class="sc">$</span>feature_importance</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    perf_metric perf_metric_diff pvalue    names method perf_metric_name seed</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    0.5542375        0.0082625   0.37 Otu00001     rf              AUC 2019</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    0.5731750       -0.0106750   0.57 Otu00002     rf              AUC 2019</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    0.5548750        0.0076250   0.38 Otu00003     rf              AUC 2019</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4    0.6414750       -0.0789750   0.99 Otu00004     rf              AUC 2019</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5    0.5049625        0.0575375   0.05 Otu00005     rf              AUC 2019</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6    0.5444500        0.0180500   0.18 Otu00006     rf              AUC 2019</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7    0.5417125        0.0207875   0.21 Otu00007     rf              AUC 2019</span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8    0.5257750        0.0367250   0.05 Otu00008     rf              AUC 2019</span></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9    0.5395750        0.0229250   0.02 Otu00009     rf              AUC 2019</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10   0.4977625        0.0647375   0.05 Otu00010     rf              AUC 2019</span></span></code></pre></div>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    perf_metric perf_metric_diff     pvalue    names method perf_metric_name</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    0.5542375        0.0082625 0.40594059 Otu00001     rf              AUC</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    0.5731750       -0.0106750 0.62376238 Otu00002     rf              AUC</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    0.5548750        0.0076250 0.43564356 Otu00003     rf              AUC</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4    0.6414750       -0.0789750 0.99009901 Otu00004     rf              AUC</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5    0.5049625        0.0575375 0.05940594 Otu00005     rf              AUC</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6    0.5444500        0.0180500 0.19801980 Otu00006     rf              AUC</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7    0.5417125        0.0207875 0.23762376 Otu00007     rf              AUC</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8    0.5257750        0.0367250 0.08910891 Otu00008     rf              AUC</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9    0.5395750        0.0229250 0.05940594 Otu00009     rf              AUC</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10   0.4977625        0.0647375 0.05940594 Otu00010     rf              AUC</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    seed</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  2019</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  2019</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  2019</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  2019</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5  2019</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  2019</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7  2019</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8  2019</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9  2019</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 2019</span></span></code></pre></div>
 <p>There are several columns:</p>
 <ol style="list-style-type: decimal">
-<li><code>perf_metric</code>: The performance value of the permuted feature.</li>
-<li><code>perf_metric_diff</code>: The difference between the performance for the actual and permuted data (i.e. test performance minus permuted performance). Features with a larger <code>perf_metric_diff</code> are more important.</li>
-<li><code>pvalue</code>: the probability of obtaining the actual performance value under the null hypothesis.</li>
+<li><code>perf_metric</code>: The performance value of the permuted
+feature.</li>
+<li><code>perf_metric_diff</code>: The difference between the
+performance for the actual and permuted data (i.e. test performance
+minus permuted performance). Features with a larger
+<code>perf_metric_diff</code> are more important.</li>
+<li><code>pvalue</code>: the probability of obtaining the actual
+performance value under the null hypothesis.</li>
 <li><code>names</code>: The feature that was permuted.</li>
 <li><code>method</code>: The ML method used.</li>
-<li><code>perf_metric_name</code>: The peformance metric used.</li>
+<li><code>perf_metric_name</code>: The performance metric used.</li>
 <li><code>seed</code>: The seed (if set).</li>
 </ol>
-<p>As you can see here, the differences are negligible (close to zero), which makes sense since our model isn’t great. If you’re interested in feature importance, it’s especially useful to run multiple different train/test splits, as shown in our <a href="https://github.com/SchlossLab/mikropml-snakemake-workflow/">example snakemake workflow</a>.</p>
-<p>You can also choose to permute correlated features together using <code>corr_thresh</code> (default: 1). Any features that are above the correlation threshold are permuted together; i.e. perfectly correlated features are permuted together when using the default value.</p>
+<p>As you can see here, the differences are negligible (close to zero),
+which makes sense since our model isn’t great. If you’re interested in
+feature importance, it’s especially useful to run multiple different
+train/test splits, as shown in our <a href="https://github.com/SchlossLab/mikropml-snakemake-workflow/">example
+snakemake workflow</a>.</p>
+<p>You can also choose to permute correlated features together using
+<code>corr_thresh</code> (default: 1). Any features that are above the
+correlation threshold are permuted together; i.e. perfectly correlated
+features are permuted together when using the default value.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>results_imp_corr <span class="ot">&lt;-</span> <span class="fu">run_ml</span>(otu_mini_bin,</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&#39;glmnet&#39;</span>,</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">cv_times =</span> <span class="dv">5</span>,</span>
@@ -493,10 +874,10 @@ div.csl-indent {
 <span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Finding feature importance...</span></span>
 <span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Feature importance complete.</span></span>
 <span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>results_imp_corr<span class="sc">$</span>feature_importance</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   perf_metric perf_metric_diff pvalue</span></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1   0.5502105       0.09715789   0.08</span></span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2   0.6369474       0.01042105   0.40</span></span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3   0.5951316       0.05223684   0.08</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   perf_metric perf_metric_diff     pvalue</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1   0.5502105       0.09715789 0.08910891</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2   0.6369474       0.01042105 0.44554455</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3   0.5951316       0.05223684 0.11881188</span></span>
 <span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                                     names</span></span>
 <span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Otu00001|Otu00002|Otu00003|Otu00005|Otu00006|Otu00007|Otu00009|Otu00010</span></span>
 <span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2                                                                Otu00004</span></span>
@@ -505,24 +886,41 @@ div.csl-indent {
 <span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 glmnet              AUC 2019</span></span>
 <span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 glmnet              AUC 2019</span></span>
 <span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 glmnet              AUC 2019</span></span></code></pre></div>
-<p>You can see which features were permuted together in the <code>names</code> column. Here all 3 features were permuted together (which doesn’t really make sense, but it’s just an example).</p>
-<p>If you previously executed <code>run_ml()</code> without feature importance but now wish to find feature importance after the fact, see the example code in the <code>get_feature_importance()</code> documentation.</p>
-<p><code>get_feature_importance()</code> can show a live progress bar, see <code>vignette(&quot;parallel&quot;)</code> for examples.</p>
+<p>You can see which features were permuted together in the
+<code>names</code> column. Here all 3 features were permuted together
+(which doesn’t really make sense, but it’s just an example).</p>
+<p>If you previously executed <code>run_ml()</code> without feature
+importance but now wish to find feature importance after the fact, see
+the example code in the <code>get_feature_importance()</code>
+documentation.</p>
+<p><code>get_feature_importance()</code> can show a live progress bar,
+see <code>vignette(&quot;parallel&quot;)</code> for examples.</p>
 </div>
 <div id="tuning-hyperparameters-using-the-hyperparameter-argument" class="section level1">
-<h1>Tuning hyperparameters (using the <code>hyperparameter</code> argument)</h1>
-<p>This is important, so we have a whole vignette about them. The bottom line is we provide default hyperparameters that you can start with, but it’s important to tune your hyperparameters. For more information about what the default hyperparameters are, and how to tune hyperparameters, see <code>vignette(&quot;tuning&quot;)</code>.</p>
+<h1>Tuning hyperparameters (using the <code>hyperparameter</code>
+argument)</h1>
+<p>This is important, so we have a whole vignette about them. The bottom
+line is we provide default hyperparameters that you can start with, but
+it’s important to tune your hyperparameters. For more information about
+what the default hyperparameters are, and how to tune hyperparameters,
+see <code>vignette(&quot;tuning&quot;)</code>.</p>
 </div>
 <div id="other-models" class="section level1">
 <h1>Other models</h1>
-<p>Here are examples of how to train and evaluate other models. The output for all of them is very similar, so we won’t go into those details.</p>
+<p>Here are examples of how to train and evaluate other models. The
+output for all of them is very similar, so we won’t go into those
+details.</p>
 <div id="random-forest" class="section level2">
 <h2>Random forest</h2>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>results_rf <span class="ot">&lt;-</span> <span class="fu">run_ml</span>(otu_mini_bin,</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&#39;rf&#39;</span>,</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">cv_times =</span> <span class="dv">5</span>,</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">seed =</span> <span class="dv">2019</span>)</span></code></pre></div>
-<p>You can also change the number of trees to use for random forest (<code>ntree</code>; default: 1000). This can’t be tuned using <code>rf</code> package implementation of random forest. Please refer to <code>caret</code> documentation if you are interested in other packages with random forest implementations.</p>
+<p>You can also change the number of trees to use for random forest
+(<code>ntree</code>; default: 1000). This can’t be tuned using
+<code>rf</code> package implementation of random forest. Please refer to
+<code>caret</code> documentation if you are interested in other packages
+with random forest implementations.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>results_rf_nt <span class="ot">&lt;-</span> <span class="fu">run_ml</span>(otu_mini_bin,</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&#39;rf&#39;</span>,</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">cv_times =</span> <span class="dv">5</span>,</span>
@@ -542,14 +940,16 @@ div.csl-indent {
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&#39;svmRadial&#39;</span>,</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">cv_times =</span> <span class="dv">5</span>,</span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">seed =</span> <span class="dv">2019</span>)</span></code></pre></div>
-<p>If you get a message “maximum number of iterations reached,” see <a href="https://github.com/topepo/caret/issues/425">this issue</a> in caret.</p>
+<p>If you get a message “maximum number of iterations reached”, see <a href="https://github.com/topepo/caret/issues/425">this issue</a> in
+caret.</p>
 </div>
 </div>
 <div id="other-data" class="section level1">
 <h1>Other data</h1>
 <div id="multiclass-data" class="section level2">
 <h2>Multiclass data</h2>
-<p>We provide <code>otu_mini_multi</code> with a multiclass outcome (three or more outcomes):</p>
+<p>We provide <code>otu_mini_multi</code> with a multiclass outcome
+(three or more outcomes):</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>otu_mini_multi <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">pull</span>(<span class="st">&#39;dx&#39;</span>) <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;adenoma&quot;   &quot;carcinoma&quot; &quot;normal&quot;</span></span></code></pre></div>
 <p>Here’s an example of running multiclass data:</p>
@@ -557,7 +957,8 @@ div.csl-indent {
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">outcome_colname =</span> <span class="st">&quot;dx&quot;</span>,</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">seed =</span> <span class="dv">2019</span></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>The performance metrics are slightly different, but the format of everything else is the same:</p>
+<p>The performance metrics are slightly different, but the format of
+everything else is the same:</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>results_multi<span class="sc">$</span>performance</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 17</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   cv_metric_logLoss logLoss   AUC prAUC Accuracy  Kappa Mean_F1 Mean_Sensitivity</span></span>
@@ -570,12 +971,14 @@ div.csl-indent {
 </div>
 <div id="continuous-data" class="section level2">
 <h2>Continuous data</h2>
-<p>And here’s an example for running continuous data, where the outcome column is numerical:</p>
+<p>And here’s an example for running continuous data, where the outcome
+column is numerical:</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>results_cont <span class="ot">&lt;-</span> <span class="fu">run_ml</span>(otu_mini_bin[, <span class="dv">2</span><span class="sc">:</span><span class="dv">11</span>],</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&#39;glmnet&#39;</span>,</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">outcome_colname =</span> <span class="st">&#39;Otu00001&#39;</span>,</span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">seed =</span> <span class="dv">2019</span>)</span></code></pre></div>
-<p>Again, the performance metrics are slightly different, but the format of the rest is the same:</p>
+<p>Again, the performance metrics are slightly different, but the format
+of the rest is the same:</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>results_cont<span class="sc">$</span>performance</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 6</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   cv_metric_RMSE  RMSE Rsquared   MAE method  seed</span></span>
@@ -587,10 +990,18 @@ div.csl-indent {
 <h1 class="unnumbered">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-tang_democratizing_2020" class="csl-entry">
-Tang, Shengpu, Parmida Davarmanesh, Yanmeng Song, Danai Koutra, Michael W. Sjoding, and Jenna Wiens. 2020. <span>“Democratizing <span>EHR</span> Analyses with <span>FIDDLE</span>: A Flexible Data-Driven Preprocessing Pipeline for Structured Clinical Data.”</span> <em>J Am Med Inform Assoc</em>, October. <a href="https://doi.org/10.1093/jamia/ocaa139">https://doi.org/10.1093/jamia/ocaa139</a>.
+Tang, Shengpu, Parmida Davarmanesh, Yanmeng Song, Danai Koutra, Michael
+W. Sjoding, and Jenna Wiens. 2020. <span>“Democratizing <span>EHR</span>
+Analyses with <span>FIDDLE</span>: A Flexible Data-Driven Preprocessing
+Pipeline for Structured Clinical Data.”</span> <em>J Am Med Inform
+Assoc</em>, October. <a href="https://doi.org/10.1093/jamia/ocaa139">https://doi.org/10.1093/jamia/ocaa139</a>.
 </div>
 <div id="ref-topcuoglu_framework_2020" class="csl-entry">
-Topçuoğlu, Begüm D., Nicholas A. Lesniak, Mack T. Ruffin, Jenna Wiens, and Patrick D. Schloss. 2020. <span>“A <span>Framework</span> for <span>Effective Application</span> of <span>Machine Learning</span> to <span>Microbiome</span>-<span>Based Classification Problems</span>.”</span> <em>mBio</em> 11 (3). <a href="https://doi.org/10.1128/mBio.00434-20">https://doi.org/10.1128/mBio.00434-20</a>.
+Topçuoğlu, Begüm D., Nicholas A. Lesniak, Mack T. Ruffin, Jenna Wiens,
+and Patrick D. Schloss. 2020. <span>“A <span>Framework</span> for
+<span>Effective Application</span> of <span>Machine Learning</span> to
+<span>Microbiome</span>-<span>Based Classification
+Problems</span>.”</span> <em>mBio</em> 11 (3). <a href="https://doi.org/10.1128/mBio.00434-20">https://doi.org/10.1128/mBio.00434-20</a>.
 </div>
 </div>
 </div>

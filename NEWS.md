@@ -1,3 +1,10 @@
+# mikropml 1.3.0
+
+- mikropml now requires R version 4.1.0 or greater due to an update in the randomForest package (#292). 
+- New function `compare_models()` compares the performance of two models with a permutation test (#295, @courtneyarmour).
+- Fixed a bug where `cv_times` did not affect the reported repeats for cross-validation (#291, @kelly-sovacool).
+- Made minor documentation improvements (#293, @kelly-sovacool)
+
 # mikropml 1.2.2
 
 This minor patch fixes a test failure on platforms with no long doubles.

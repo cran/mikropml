@@ -106,6 +106,29 @@ results_grp_trainA <- run_ml(otu_mini_bin,
                                               ),
                       seed = 2019)
 
+## ----calc-case-weights, message = FALSE---------------------------------------
+library(dplyr)
+case_weights_dat <- otu_mini_bin %>%
+    count(dx) %>%
+    mutate(p = n / sum(n)) %>%
+    select(dx, p) %>% 
+    right_join(otu_mini_bin, by = 'dx') %>%
+    select(-starts_with("Otu")) %>% 
+    mutate(in_train = sample(c(TRUE, FALSE), size = nrow(otu_mini_bin), 
+                             replace = TRUE, prob = c(0.70, 0.30)),
+           row_num = row_number()) %>% 
+    filter(in_train)
+head(case_weights_dat)
+nrow(case_weights_dat) / nrow(otu_mini_bin)
+
+## ----weighted-results, eval = FALSE-------------------------------------------
+#  results_weighted <- run_ml(otu_mini_bin,
+#                    'glmnet',
+#                    outcome_colname = 'dx',
+#                    seed = 2019,
+#                    training_frac = case_weights_dat %>% pull(row_num),
+#                    weights = case_weights_dat %>% pull(p))
+
 ## ---- eval = FALSE------------------------------------------------------------
 #  results_imp <- run_ml(otu_mini_bin,
 #    "rf",
@@ -139,7 +162,7 @@ results_imp_corr$feature_importance
 #  results_rf_nt <- run_ml(otu_mini_bin,
 #                          'rf',
 #                          cv_times = 5,
-#                          ntree = 10,
+#                          ntree = 1000,
 #                          seed = 2019)
 
 ## ---- eval = FALSE------------------------------------------------------------

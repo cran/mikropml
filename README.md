@@ -14,7 +14,6 @@ User-Friendly R Package for Supervised Machine Learning Pipelines
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/SchlossLab/mikropml/blob/main/LICENSE.md)
 [![CRAN](https://img.shields.io/cran/v/mikropml?color=blue&label=CRAN&logo=R)](https://CRAN.R-project.org/package=mikropml)
 [![Conda](https://img.shields.io/conda/vn/conda-forge/r-mikropml)](https://anaconda.org/conda-forge/r-mikropml)
-![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/mikropml)
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.03073/status.svg)](https://doi.org/10.21105/joss.03073)
 <!-- badges: end -->
 
@@ -30,6 +29,7 @@ information, documentation, and examples.
 
 You can install the latest release from
 [CRAN](https://cran.r-project.org/package=mikropml):
+<img src='https://cranlogs.r-pkg.org/badges/grand-total/mikropml' align='right'/>
 
 ``` r
 install.packages('mikropml')
@@ -44,10 +44,12 @@ devtools::install_github("SchlossLab/mikropml")
 ```
 
 or install from a terminal using
-[conda](https://docs.conda.io/projects/conda/en/latest/index.html):
+[conda](https://docs.conda.io/projects/conda/en/latest/index.html) or
+[mamba](https://mamba.readthedocs.io/en/latest/):
+<img src='https://anaconda.org/conda-forge/r-mikropml/badges/downloads.svg' align='right'/>
 
 ``` bash
-conda install -c conda-forge r-mikropml
+mamba install -c conda-forge r-mikropml
 ```
 
 ### Dependencies
@@ -80,6 +82,9 @@ If you come across a bug, [open an
 issue](https://github.com/SchlossLab/mikropml/issues) and include a
 [minimal reproducible example](https://www.tidyverse.org/help/).
 
+If you have questions, create a new post in
+[Discussions](https://github.com/SchlossLab/mikropml/discussions).
+
 If you’d like to contribute, see our guidelines
 [here](http://www.schlosslab.org/mikropml/CONTRIBUTING.html).
 
@@ -100,28 +105,36 @@ license](https://creativecommons.org/licenses/by/4.0/).
 
 ## Citation
 
+To cite mikropml in publications, use:
+
+> 
+> 
+> <p>
+> 
+> Topçuoğlu BD, Lapp Z, Sovacool KL, Snitkin E, Wiens J, Schloss PD
+> (2021). “mikropml: User-Friendly R Package for Supervised Machine
+> Learning Pipelines.” <em>Journal of Open Source Software</em>,
+> <b>6</b>(61), 3073.
+> <a href="https://doi.org/10.21105/joss.03073">doi:10.21105/joss.03073</a>,
+> <a href="https://joss.theoj.org/papers/10.21105/joss.03073">https://joss.theoj.org/papers/10.21105/joss.03073</a>.
+> 
+> </p>
+
+A BibTeX entry for LaTeX users is:
+
 ``` 
-
-To cite mikRopML in publications, use:
-
-  Topçuoğlu et al., (2021). mikropml: User-Friendly R Package for
-  Supervised Machine Learning Pipelines. Journal of Open Source
-  Software, 6(61), 3073, https://doi.org/10.21105/joss.03073
-
-A BibTeX entry for LaTeX users is
-
-  @Article{,
-    title = {{mikropml}: User-Friendly R Package for Supervised Machine Learning Pipelines},
-    author = {Begüm D. Topçuoğlu and Zena Lapp and Kelly L. Sovacool and Evan Snitkin and Jenna Wiens and Patrick D. Schloss},
-    journal = {Journal of Open Source Software},
-    year = {2021},
-    month = {May},
-    volume = {6},
-    number = {61},
-    pages = {3073},
-    doi = {10.21105/joss.03073},
-    url = {https://joss.theoj.org/papers/10.21105/joss.03073},
-  }
+ @Article{,
+  title = {{mikropml}: User-Friendly R Package for Supervised Machine Learning Pipelines},
+  author = {Begüm D. Topçuoğlu and Zena Lapp and Kelly L. Sovacool and Evan Snitkin and Jenna Wiens and Patrick D. Schloss},
+  journal = {Journal of Open Source Software},
+  year = {2021},
+  month = {May},
+  volume = {6},
+  number = {61},
+  pages = {3073},
+  doi = {10.21105/joss.03073},
+  url = {https://joss.theoj.org/papers/10.21105/joss.03073},
+} 
 ```
 
 ## Why the name?

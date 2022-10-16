@@ -53,7 +53,13 @@ test_that("check_method works", {
 })
 
 test_that("check_outcome_column works", {
-  expect_equal(expect_message(check_outcome_column(test_df, NULL), "Using"), "outcome")
+  expect_message(
+    expect_equal(
+      check_outcome_column(test_df, NULL),
+      "outcome"
+    ),
+    "Using"
+  )
   expect_error(
     check_outcome_column(test_df, "not_a_column"),
     "Outcome 'not_a_column' not in column names of data."
@@ -70,8 +76,14 @@ test_that("check_outcome_value works", {
     check_outcome_value(test_df_empty, "outcome"),
     "Possible missing data in the output variable: "
   )
-  expect_error(check_outcome_value(test_df_novar, "outcome"), "A binary or multi-class outcome variable is required, but this dataset has")
-  expect_null(expect_warning(check_outcome_value(test_df_numeric, "outcome"), "Data is being considered numeric, but all outcome values are integers. If you meant to code your values as categorical, please use character values."))
+  expect_error(
+    check_outcome_value(test_df_novar, "outcome"),
+    "A binary or multi-class outcome variable is required, but this dataset has"
+  )
+  expect_warning(
+    expect_null(check_outcome_value(test_df_numeric, "outcome")),
+    "Data is being considered numeric, but all outcome values are integers. If you meant to code your values as categorical, please use character values."
+  )
 })
 
 test_that("check_permute works", {
@@ -151,7 +163,7 @@ test_that("check_all works", {
   expect_null(check_all(
     otu_small, "glmnet", TRUE, as.integer(5), 0.8,
     NULL, NULL, NULL,
-    NULL, NULL, NULL, NA
+    NULL, NULL, NA
   ))
 })
 
@@ -167,7 +179,10 @@ test_that("check_features works", {
   expect_true(is.null(check_features(dplyr::as_tibble(test_df))))
   expect_error(check_features(NULL))
   expect_true(is.null(check_features(test_df_na, check_missing = FALSE)))
-  expect_true(is.null(expect_warning(check_features(test_df_empty), "ossible missing data in the features: ")))
+  expect_warning(
+    expect_true(is.null(check_features(test_df_empty))),
+    "ossible missing data in the features: "
+  )
   expect_error(
     check_features(test_df_na, check_missing = TRUE),
     "Missing data in the features is not allowed, but the features have"
@@ -236,11 +251,11 @@ test_that("check_remove_var works", {
 })
 
 test_that("check_ntree works", {
-  expect_null(check_ntree(NULL))
-  expect_null(check_ntree(1000))
-  expect_error(check_ntree("asdf"), "`ntree` must be of length 1 and class numeric. You provided: ")
-  expect_error(check_ntree(-10), "`ntree` must be greater than zero. You provided: ")
-  expect_error(check_ntree(c(0, 1)), "`ntree` must be of length 1 and class numeric. You provided: ")
+  expect_null(check_ntree(NULL)) %>% expect_warning("'check_ntree' is deprecated.")
+  expect_null(check_ntree(1000)) %>% expect_warning("'check_ntree' is deprecated.")
+  expect_error(check_ntree("asdf"), "`ntree` must be of length 1 and class numeric. You provided: ") %>% expect_warning("'check_ntree' is deprecated.")
+  expect_error(check_ntree(-10), "`ntree` must be greater than zero. You provided: ") %>% expect_warning("'check_ntree' is deprecated.")
+  expect_error(check_ntree(c(0, 1)), "`ntree` must be of length 1 and class numeric. You provided: ") %>% expect_warning("'check_ntree' is deprecated.")
 })
 
 test_that("abort_packages_not_installed works", {

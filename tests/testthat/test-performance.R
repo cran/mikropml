@@ -1,4 +1,3 @@
-
 test_that("get_outcome_type works", {
   expect_equal(get_outcome_type(c(1, 2, 1)), "continuous")
   expect_equal(get_outcome_type(c("a", "b", "b")), "binary")
@@ -61,14 +60,65 @@ test_that("get_performance_tbl works", {
     ),
     otu_mini_bin_results_glmnet$performance
   )
-  expect_warning(get_performance_tbl(
-    otu_mini_bin_results_glmnet$trained_model,
-    otu_mini_bin_results_glmnet$test_data,
-    "dx",
-    caret::multiClassSummary,
-    "not_a_perf_metric",
-    TRUE,
-    "glmnet",
-    seed = 2019
-  ), "The performance metric provided does not match the metric used to train the data.")
+  expect_warning(
+    get_performance_tbl(
+      otu_mini_bin_results_glmnet$trained_model,
+      otu_mini_bin_results_glmnet$test_data,
+      "dx",
+      caret::multiClassSummary,
+      "not_a_perf_metric",
+      TRUE,
+      "glmnet",
+      seed = 2019
+    ),
+    "The performance metric provided does not match the metric used to train the data."
+  )
+})
+
+test_that("sensspec calculations work", {
+  expect_equal(
+    calc_model_sensspec(
+      otu_mini_bin_results_glmnet$trained_model,
+      otu_mini_bin_results_glmnet$test_data,
+      "dx"
+    ),
+    readRDS(
+      testthat::test_path("fixtures", "otu_mini_bin_results_glmnet_sensspec.Rds")
+    )
+  )
+  sensspec_dat <- readRDS(test_path("fixtures", "sensspec_dat.Rds"))
+  expect_equal(
+    calc_mean_roc(sensspec_dat),
+    readRDS(testthat::test_path("fixtures", "sensspec_roc.Rds"))
+  )
+  expect_equal(
+    calc_mean_prc(sensspec_dat),
+    readRDS(testthat::test_path("fixtures", "sensspec_prc.Rds"))
+  )
+})
+
+test_that("calc_baseline_precision works", {
+  expect_equal(
+    calc_baseline_precision(otu_mini_bin, "dx", "cancer"),
+    0.49
+  )
+  expect_equal(
+    calc_baseline_precision(otu_mini_bin, "dx", "normal"),
+    0.51
+  )
+  expect_equal(
+    data.frame(y = c("a", "b", "a", "b")) %>%
+      calc_baseline_precision("y", "a"),
+    0.50
+  )
+  expect_error(
+    data.frame(y = c("a")) %>%
+      calc_baseline_precision("y", "a"),
+    "A binary or multi-class outcome variable is required"
+  )
+  expect_error(
+    data.frame(y = c("b")) %>%
+      calc_baseline_precision("y", "a"),
+    "A binary or multi-class outcome variable is required"
+  )
 })

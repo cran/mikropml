@@ -1,8 +1,8 @@
 Package: mikropml
 Title: User-Friendly R Package for Supervised Machine Learning
         Pipelines
-Version: 1.4.0
-Date: 2022-10-15
+Version: 1.5.0
+Date: 2023-01-15
 Authors@R: 
     c(person(given = "Begüm",
              family = "Topçuoğlu",
@@ -70,7 +70,7 @@ LazyData: true
 RoxygenNote: 7.2.1
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2022-10-15 18:06:20 UTC; sovacool
+Packaged: 2023-01-16 18:09:23 UTC; sovacool
 Author: Begüm Topçuoğlu [aut] (<https://orcid.org/0000-0003-3140-537X>),
   Zena Lapp [aut] (<https://orcid.org/0000-0003-4674-2176>),
   Kelly Sovacool [aut, cre] (<https://orcid.org/0000-0003-3283-829X>),
@@ -82,4 +82,4 @@ Author: Begüm Topçuoğlu [aut] (<https://orcid.org/0000-0003-3140-537X>),
   Sarah Lucas [ctb] (<https://orcid.org/0000-0003-1676-5801>)
 Maintainer: Kelly Sovacool <sovacool@umich.edu>
 Repository: CRAN
-Date/Publication: 2022-10-16 07:30:09 UTC
+Date/Publication: 2023-01-16 19:00:02 UTC

@@ -548,12 +548,12 @@ test performance metrics, and 2 columns at the end with ML method and
 seed):</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>results<span class="sc">$</span>performance</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 17</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   cv_metric_AUC logLoss   AUC prAUC Accuracy Kappa    F1 Sensi…¹ Speci…² Pos_P…³</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1         0.622   0.684 0.647 0.606    0.590 0.179   0.6     0.6   0.579     0.6</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 7 more variables: Neg_Pred_Value &lt;dbl&gt;, Precision &lt;dbl&gt;, Recall &lt;dbl&gt;,</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Detection_Rate &lt;dbl&gt;, Balanced_Accuracy &lt;dbl&gt;, method &lt;chr&gt;, seed &lt;dbl&gt;,</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   and abbreviated variable names ¹​Sensitivity, ²​Specificity, ³​Pos_Pred_Value</span></span></code></pre></div>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   cv_metric_AUC logLoss   AUC prAUC Accuracy Kappa    F1 Sensitivity Specificity</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1         0.622   0.684 0.647 0.606    0.590 0.179   0.6         0.6       0.579</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 8 more variables: Pos_Pred_Value &lt;dbl&gt;, Neg_Pred_Value &lt;dbl&gt;,</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Precision &lt;dbl&gt;, Recall &lt;dbl&gt;, Detection_Rate &lt;dbl&gt;,</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Balanced_Accuracy &lt;dbl&gt;, method &lt;chr&gt;, seed &lt;dbl&gt;</span></span></code></pre></div>
 <p>When using logistic regression for binary classification, area under
 the receiver-operator characteristic curve (AUC) is a useful metric to
 evaluate model performance. Because of that, it’s the default that we
@@ -700,13 +700,12 @@ you can choose a different one if you’d like.</p>
 default AUC:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>results_pr<span class="sc">$</span>performance</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 17</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   cv_metric_p…¹ logLoss   AUC prAUC Accur…²  Kappa    F1 Sensi…³ Speci…⁴ Pos_P…⁵</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1         0.577   0.691 0.663 0.605   0.538 0.0539 0.690       1  0.0526   0.526</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 7 more variables: Neg_Pred_Value &lt;dbl&gt;, Precision &lt;dbl&gt;, Recall &lt;dbl&gt;,</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Detection_Rate &lt;dbl&gt;, Balanced_Accuracy &lt;dbl&gt;, method &lt;chr&gt;, seed &lt;dbl&gt;,</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   and abbreviated variable names ¹​cv_metric_prAUC, ²​Accuracy, ³​Sensitivity,</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ⁴​Specificity, ⁵​Pos_Pred_Value</span></span></code></pre></div>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   cv_metric_prAUC logLoss   AUC prAUC Accuracy  Kappa    F1 Sensitivity</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1           0.577   0.691 0.663 0.605    0.538 0.0539 0.690           1</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 9 more variables: Specificity &lt;dbl&gt;, Pos_Pred_Value &lt;dbl&gt;,</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Neg_Pred_Value &lt;dbl&gt;, Precision &lt;dbl&gt;, Recall &lt;dbl&gt;, Detection_Rate &lt;dbl&gt;,</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Balanced_Accuracy &lt;dbl&gt;, method &lt;chr&gt;, seed &lt;dbl&gt;</span></span></code></pre></div>
 </div>
 <div id="using-groups" class="section level2">
 <h2>Using groups</h2>
@@ -888,28 +887,28 @@ features are important in predicting your outcome.</p>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>Now, we can check out the feature importances:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>results_imp<span class="sc">$</span>feature_importance</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    perf_metric perf_metric_diff     pvalue    names method perf_metric_name</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    0.5459125        0.0003375 0.51485149 Otu00001     rf              AUC</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    0.5682625       -0.0220125 0.73267327 Otu00002     rf              AUC</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    0.5482875       -0.0020375 0.56435644 Otu00003     rf              AUC</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4    0.6314375       -0.0851875 1.00000000 Otu00004     rf              AUC</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5    0.4991750        0.0470750 0.08910891 Otu00005     rf              AUC</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6    0.5364875        0.0097625 0.28712871 Otu00006     rf              AUC</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7    0.5382875        0.0079625 0.39603960 Otu00007     rf              AUC</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8    0.5160500        0.0302000 0.09900990 Otu00008     rf              AUC</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9    0.5293375        0.0169125 0.17821782 Otu00009     rf              AUC</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10   0.4976500        0.0486000 0.12871287 Otu00010     rf              AUC</span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    seed</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  2019</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  2019</span></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  2019</span></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  2019</span></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5  2019</span></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  2019</span></span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7  2019</span></span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8  2019</span></span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9  2019</span></span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 2019</span></span></code></pre></div>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    perf_metric perf_metric_diff     pvalue   lower   upper     feat method</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    0.5459125        0.0003375 0.51485149 0.49125 0.60250 Otu00001     rf</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    0.5682625       -0.0220125 0.73267327 0.50625 0.63125 Otu00002     rf</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    0.5482875       -0.0020375 0.56435644 0.50500 0.59000 Otu00003     rf</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4    0.6314375       -0.0851875 1.00000000 0.55250 0.71250 Otu00004     rf</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5    0.4991750        0.0470750 0.08910891 0.44125 0.57125 Otu00005     rf</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6    0.5364875        0.0097625 0.28712871 0.50125 0.57375 Otu00006     rf</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7    0.5382875        0.0079625 0.39603960 0.47500 0.58750 Otu00007     rf</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8    0.5160500        0.0302000 0.09900990 0.46750 0.55750 Otu00008     rf</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9    0.5293375        0.0169125 0.17821782 0.49500 0.55625 Otu00009     rf</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10   0.4976500        0.0486000 0.12871287 0.41000 0.56250 Otu00010     rf</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    perf_metric_name seed</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1               AUC 2019</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2               AUC 2019</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3               AUC 2019</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4               AUC 2019</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5               AUC 2019</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6               AUC 2019</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7               AUC 2019</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8               AUC 2019</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9               AUC 2019</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10              AUC 2019</span></span></code></pre></div>
 <p>There are several columns:</p>
 <ol style="list-style-type: decimal">
 <li><code>perf_metric</code>: The performance value of the permuted
@@ -920,9 +919,17 @@ minus permuted performance). Features with a larger
 <code>perf_metric_diff</code> are more important.</li>
 <li><code>pvalue</code>: the probability of obtaining the actual
 performance value under the null hypothesis.</li>
-<li><code>names</code>: The feature that was permuted.</li>
-<li><code>method</code>: The ML method used.</li>
-<li><code>perf_metric_name</code>: The performance metric used.</li>
+<li><code>lower</code>: the lower bound for the 95% confidence interval
+of <code>perf_metric</code>.</li>
+<li><code>upper</code>: the upper bound for the 95% confidence interval
+of <code>perf_metric</code>.</li>
+<li><code>feat</code>: The feature (or group of correlated features)
+that was permuted.</li>
+<li><code>method</code>: The <a href="#the-methods-we-support">ML
+method</a> used.</li>
+<li><code>perf_metric_name</code>: The <a href="#id_-changing-the-performance-metric">name of the performance
+metric</a> represented by <code>perf_metric</code> &amp;
+<code>perf_metric_diff</code>.</li>
 <li><code>seed</code>: The seed (if set).</li>
 </ol>
 <p>As you can see here, the differences are negligible (close to zero),
@@ -952,14 +959,14 @@ features are permuted together when using the default value.</p>
 <span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Finding feature importance...</span></span>
 <span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Feature importance complete.</span></span>
 <span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>results_imp_corr<span class="sc">$</span>feature_importance</span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   perf_metric perf_metric_diff     pvalue</span></span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1   0.4941842        0.1531842 0.05940594</span></span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                                                       names</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   perf_metric perf_metric_diff     pvalue     lower     upper</span></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1   0.4941842        0.1531842 0.05940594 0.3236842 0.6473684</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                                                        feat</span></span>
 <span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Otu00001|Otu00002|Otu00003|Otu00004|Otu00005|Otu00006|Otu00007|Otu00008|Otu00009|Otu00010</span></span>
 <span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   method perf_metric_name seed</span></span>
 <span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 glmnet              AUC 2019</span></span></code></pre></div>
 <p>You can see which features were permuted together in the
-<code>names</code> column. Here all 3 features were permuted together
+<code>feat</code> column. Here all 3 features were permuted together
 (which doesn’t really make sense, but it’s just an example).</p>
 <p>If you previously executed <code>run_ml()</code> without feature
 importance but now wish to find feature importance after the fact, see
@@ -1039,14 +1046,13 @@ caret.</p>
 everything else is the same:</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>results_multi<span class="sc">$</span>performance</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 17</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   cv_metric…¹ logLoss   AUC prAUC Accur…²  Kappa Mean_F1 Mean_…³ Mean_…⁴ Mean_…⁵</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;  </span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1        1.07    1.11 0.506 0.353   0.382 0.0449 &lt;NA&gt;      0.360   0.682 NaN    </span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 7 more variables: Mean_Neg_Pred_Value &lt;dbl&gt;, Mean_Precision &lt;chr&gt;,</span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Mean_Recall &lt;dbl&gt;, Mean_Detection_Rate &lt;dbl&gt;, Mean_Balanced_Accuracy &lt;dbl&gt;,</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   method &lt;chr&gt;, seed &lt;dbl&gt;, and abbreviated variable names</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ¹​cv_metric_logLoss, ²​Accuracy, ³​Mean_Sensitivity, ⁴​Mean_Specificity,</span></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ⁵​Mean_Pos_Pred_Value</span></span></code></pre></div>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   cv_metric_logLoss logLoss   AUC prAUC Accuracy  Kappa Mean_F1 Mean_Sensitivity</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt;</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1              1.07    1.11 0.506 0.353    0.382 0.0449 &lt;NA&gt;               0.360</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 9 more variables: Mean_Specificity &lt;dbl&gt;, Mean_Pos_Pred_Value &lt;chr&gt;,</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Mean_Neg_Pred_Value &lt;dbl&gt;, Mean_Precision &lt;chr&gt;, Mean_Recall &lt;dbl&gt;,</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Mean_Detection_Rate &lt;dbl&gt;, Mean_Balanced_Accuracy &lt;dbl&gt;, method &lt;chr&gt;,</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   seed &lt;dbl&gt;</span></span></code></pre></div>
 </div>
 <div id="continuous-data" class="section level2">
 <h2>Continuous data</h2>

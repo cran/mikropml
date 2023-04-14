@@ -168,6 +168,7 @@ get_performance_tbl <- function(trained_model,
                                 class_probs,
                                 method,
                                 seed = NA) {
+  cv_metric <- NULL
   test_perf_metrics <- calc_perf_metrics(
     test_data,
     trained_model,
@@ -201,10 +202,111 @@ get_performance_tbl <- function(trained_model,
   )) %>%
     dplyr::rename_with(
       function(x) paste0("cv_metric_", perf_metric_name),
-      .data$cv_metric
+      cv_metric
     ) %>%
     change_to_num())
 }
+
+#' Calculate a bootstrap confidence interval for the performance on a single train/test split
+#'
+#' Uses [rsample::bootstraps()], [rsample::int_pctl()], and [furrr::future_map()]
+#'
+#' @param ml_result result returned from a single [run_ml()] call
+#' @inheritParams run_ml
+#' @param bootstrap_times the number of boostraps to create (default: `10000`)
+#' @param alpha the alpha level for the confidence interval (default `0.05` to create a 95% confidence interval)
+#'
+#' @return a data frame with an estimate (`.estimate`), lower bound (`.lower`),
+#'  and upper bound (`.upper`) for each performance metric (`term`).
+#' @export
+#' @author Kelly Sovacool, \email{sovacool@@umich.edu}
+#'
+#' @examples
+#' bootstrap_performance(otu_mini_bin_results_glmnet, "dx",
+#'   bootstrap_times = 10, alpha = 0.10
+#' )
+#' \dontrun{
+#' outcome_colname <- "dx"
+#' run_ml(otu_mini_bin, "rf", outcome_colname = "dx") %>%
+#'   bootstrap_performance(outcome_colname,
+#'     bootstrap_times = 10000,
+#'     alpha = 0.05
+#'   )
+#' }
+bootstrap_performance <- function(ml_result,
+                                  outcome_colname,
+                                  bootstrap_times = 10000,
+                                  alpha = 0.05) {
+  abort_packages_not_installed("assertthat", "rsample", "furrr")
+  splits <- perf <- NULL
+
+  model <- ml_result$trained_model
+  test_dat <- ml_result$test_data
+  outcome_type <- get_outcome_type(test_dat %>% dplyr::pull(outcome_colname))
+  class_probs <- outcome_type != "continuous"
+  method <- model$modelInfo$label
+  seed <- ml_result$performance %>% dplyr::pull(seed)
+  assertthat::are_equal(length(seed), 1)
+  return(
+    rsample::bootstraps(test_dat, times = bootstrap_times) %>%
+      dplyr::mutate(perf = furrr::future_map(
+        splits,
+        ~ calc_perf_bootstrap_split(
+          .x,
+          trained_model = model,
+          outcome_colname = outcome_colname,
+          perf_metric_function = get_perf_metric_fn(outcome_type),
+          perf_metric_name = model$metric,
+          class_probs = outcome_type != "continuous",
+          method = model$trained_model$modelInfo$label,
+          seed = seed
+        )
+      )) %>%
+      rsample::int_pctl(perf, alpha = alpha)
+  )
+}
+
+#' Calculate performance for a single split from [rsample::bootstraps()]
+#'
+#' Used by [bootstrap_performance()].
+#'
+#' @param test_data_split a single bootstrap of the test set from [rsample::bootstraps()]
+#' @inheritParams get_performance_tbl
+#' @return a long data frame of performance metrics for [rsample::int_pctl()]
+#'
+#' @keywords internal
+#' @author Kelly Sovacool, \email{sovacool@@umich.edu}
+#'
+calc_perf_bootstrap_split <- function(test_data_split,
+                                      trained_model,
+                                      outcome_colname,
+                                      perf_metric_function,
+                                      perf_metric_name,
+                                      class_probs,
+                                      method,
+                                      seed) {
+  abort_packages_not_installed("rsample")
+  return(
+    get_performance_tbl(
+      trained_model,
+      rsample::analysis(test_data_split),
+      outcome_colname,
+      perf_metric_function,
+      perf_metric_name,
+      class_probs,
+      method,
+      seed
+    ) %>%
+      dplyr::select(-dplyr::all_of(c(method)), -seed) %>%
+      dplyr::mutate(dplyr::across(dplyr::everything(), as.numeric)) %>%
+      tidyr::pivot_longer(
+        dplyr::everything(),
+        names_to = "term",
+        values_to = "estimate"
+      )
+  )
+}
+
 
 #' @describeIn sensspec Get sensitivity, specificity, and precision for a model.
 #'
@@ -254,13 +356,15 @@ calc_model_sensspec <- function(trained_model, test_data, outcome_colname = NULL
 
 #' Generic function to calculate mean performance curves for multiple models
 #'
+#' Used by `calc_mean_roc()` and `calc_mean_prc()`.
+#'
 #' @param sensspec_dat data frame created by concatenating results of
 #'   `calc_model_sensspec()` for multiple models.
 #' @param group_var variable to group by (e.g. specificity or recall).
 #' @param sum_var variable to summarize (e.g. sensitivity or precision).
 #'
 #' @return data frame with mean & standard deviation of `sum_var` summarized over `group_var`
-#' @keywords internal
+#' @export
 #'
 #' @author Courtney Armour
 #' @author Kelly Sovacool
@@ -350,7 +454,7 @@ calc_mean_prc <- function(sensspec_dat) {
 #'     ml_result$test_data,
 #'     "dx"
 #'   ) %>%
-#'     mutate(seed = seed)
+#'     dplyr::mutate(seed = seed)
 #'   return(sensspec)
 #' }
 #' sensspec_dat <- purrr::map_dfr(seq(100, 102), get_sensspec_seed)
@@ -368,6 +472,17 @@ calc_mean_prc <- function(sensspec_dat) {
 #' baseline_prec <- calc_baseline_precision(otu_mini_bin, "dx", "cancer")
 #' prc_dat %>%
 #'   plot_mean_prc(baseline_precision = baseline_prec)
+#'
+#' # balanced precision
+#' prior <- calc_baseline_precision(otu_mini_bin,
+#'   outcome_colname = "dx",
+#'   pos_outcome = "cancer"
+#' )
+#' bprc_dat <- sensspec_dat %>%
+#'   dplyr::mutate(balanced_precision = calc_balanced_precision(precision, prior)) %>%
+#'   dplyr::rename(recall = sensitivity) %>%
+#'   calc_mean_perf(group_var = recall, sum_var = balanced_precision)
+#' bprc_dat %>% plot_mean_prc(ycol = mean_balanced_precision) + ylab("Mean Bal. Precision")
 #' }
 NULL
 
@@ -386,7 +501,10 @@ NULL
 #' @examples
 #' # calculate the baseline precision
 #' data.frame(y = c("a", "b", "a", "b")) %>%
-#'   calc_baseline_precision("y", "a")
+#'   calc_baseline_precision(
+#'     outcome_colname = "y",
+#'     pos_outcome = "a"
+#'   )
 #'
 #'
 #' calc_baseline_precision(otu_mini_bin,
@@ -413,3 +531,55 @@ calc_baseline_precision <- function(dataset,
   baseline_prec <- npos / ntot
   return(baseline_prec)
 }
+
+#' Calculate balanced precision given actual and baseline precision
+#'
+#' Implements Equation 1 from Wu _et al._ 2021 \doi{10.1016/j.ajhg.2021.08.012}.
+#' It is the same as Equation 7 if `AUPRC` (aka `prAUC`) is used in place of `precision`.
+#'
+#' @param precision actual precision of the model.
+#' @param prior baseline precision, aka frequency of positives.
+#'   Can be calculated with [calc_baseline_precision]
+#'
+#' @return the expected precision if the data were balanced
+#' @export
+#' @author Kelly Sovacool \email{sovacool@@umich.edu}
+#'
+#' @examples
+#' prior <- calc_baseline_precision(otu_mini_bin,
+#'   outcome_colname = "dx",
+#'   pos_outcome = "cancer"
+#' )
+#' calc_balanced_precision(otu_mini_bin_results_rf$performance$Precision, prior)
+#'
+#' otu_mini_bin_results_rf$performance %>%
+#'   dplyr::mutate(
+#'     balanced_precision = calc_balanced_precision(Precision, prior),
+#'     aubprc = calc_balanced_precision(prAUC, prior)
+#'   ) %>%
+#'   dplyr::select(AUC, Precision, balanced_precision, aubprc)
+#'
+#' # cumulative performance for a single model
+#' sensspec_1 <- calc_model_sensspec(
+#'   otu_mini_bin_results_glmnet$trained_model,
+#'   otu_mini_bin_results_glmnet$test_data,
+#'   "dx"
+#' )
+#' head(sensspec_1)
+#' prior <- calc_baseline_precision(otu_mini_bin,
+#'   outcome_colname = "dx",
+#'   pos_outcome = "cancer"
+#' )
+#' sensspec_1 %>%
+#'   dplyr::mutate(balanced_precision = calc_balanced_precision(precision, prior)) %>%
+#'   dplyr::rename(recall = sensitivity) %>%
+#'   calc_mean_perf(group_var = recall, sum_var = balanced_precision) %>%
+#'   plot_mean_prc(ycol = mean_balanced_precision)
+calc_balanced_precision <-
+  function(precision, prior) {
+    return(
+      precision * (1 - prior) / (
+        precision * (1 - prior) + (1 - precision) * prior
+      )
+    )
+  }

@@ -7,7 +7,7 @@
 calc_baseline_precision(dataset, outcome_colname = NULL, pos_outcome = NULL)
 }
 \arguments{
-\item{dataset}{Dataframe with an outcome variable and other columns as features.}
+\item{dataset}{Data frame with an outcome variable and other columns as features.}
 
 \item{outcome_colname}{Column name as a string of the outcome variable
 (default \code{NULL}; the first column will be chosen automatically).}
@@ -24,7 +24,10 @@ Calculate the fraction of positives, i.e. baseline precision for a PRC curve
 \examples{
 # calculate the baseline precision
 data.frame(y = c("a", "b", "a", "b")) \%>\%
-  calc_baseline_precision("y", "a")
+  calc_baseline_precision(
+    outcome_colname = "y",
+    pos_outcome = "a"
+  )
 
 
 calc_baseline_precision(otu_mini_bin,

@@ -56,8 +56,9 @@ mamba install -c conda-forge r-mikropml
 
 - Imports: caret, dplyr, e1071, glmnet, kernlab, MLmetrics,
   randomForest, rlang, rpart, stats, utils, xgboost
-- Suggests: doFuture, foreach, future, future.apply, ggplot2, knitr,
-  progress, progressr, purrr, rmarkdown, testthat, tidyr
+- Suggests: assertthat, doFuture, forcats, foreach, future,
+  future.apply, furrr, ggplot2, knitr, progress, progressr, purrr,
+  rmarkdown, rsample, testthat, tidyr
 
 ## Usage
 
@@ -129,7 +130,6 @@ A BibTeX entry for LaTeX users is:
       author = {Begüm D. Topçuoğlu and Zena Lapp and Kelly L. Sovacool and Evan Snitkin and Jenna Wiens and Patrick D. Schloss},
       journal = {Journal of Open Source Software},
       year = {2021},
-      month = {May},
       volume = {6},
       number = {61},
       pages = {3073},

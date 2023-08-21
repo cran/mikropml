@@ -1,7 +1,7 @@
-4f5e4629ebd35099e01bb89df29cdf61 *DESCRIPTION
+1f543723204b512de5a7a213e72bc028 *DESCRIPTION
 a36ce92070c05767db8837425ab606b2 *LICENSE
 d472311485085e46452ca46dc4a99e82 *NAMESPACE
-90dfe659b4800a90414827c540619f3b *NEWS.md
+4b3c78cdd11e4a7f4046510cb75ba7db *NEWS.md
 95dbfe9e717b58e59a630da462a2cca0 *R/checks.R
 50924ad4ed84e30c2387d0c03e256aa7 *R/compare_models.R
 cffb824251f94fa4904185520d6d5e2a *R/corr_feats.R
@@ -9,7 +9,7 @@ ba9ed60b3cc4f998a1983b8a0f4a7658 *R/cross_val.R
 fef2c6872c77e540d9df0fce7d51d33b *R/data.R
 c76d53eac9df7ed7451258db7fe810a5 *R/feature_importance.R
 668f187c018a738676858281ed9cdb39 *R/hyperparameters.R
-1dd6083312b8c0b9c766f01124b846fe *R/mikropml.R
+7fbbdd3f9f6f78e1ad63e0c39f4e3cd9 *R/mikropml.R
 627959e2819d450a9e1ddabe3a8bfd6b *R/partition.R
 b83abdc77ac8c0158374cf8550e4bce9 *R/performance.R
 6a22a8bcd04327a87fcca14657aa624a *R/plot.R
@@ -38,10 +38,10 @@ ab02287ff2354cb807c5e1e63ef5e3e8 *data/otu_small.rda
 e82788c5611aba411d30d34bf0b51814 *inst/CITATION
 6eaed6b3a990fc741fac213b732f3f17 *inst/doc/introduction.R
 b48bcae1f24c53f003e06f6aa6e1b470 *inst/doc/introduction.Rmd
-e2c7644b15010d30be63490462b83b95 *inst/doc/introduction.html
+e7e900a9e63903339fc348f4beaef29c *inst/doc/introduction.html
 f298ab531c9afb6f13fadc2def0e52b6 *inst/doc/paper.R
 0736681af683f9124be075c785ec942e *inst/doc/paper.Rmd
-2f0363a47a43f93b5d70c0d0957d5a45 *inst/doc/paper.html
+88086c207637f5a880d19676127b73c7 *inst/doc/paper.html
 4f3e2289ae49609b7a29ea1c184b8630 *man/abort_packages_not_installed.Rd
 56f11ed550f27684cbc73ca199abe912 *man/bootstrap_performance.Rd
 2e5411825188330acf442cd74aa16b4f *man/bounds.Rd
@@ -102,7 +102,7 @@ c2de1816a1fef8378d7045c966edff98 *man/get_performance_tbl.Rd
 9c80cdc65fa769f63074b812fdf1e08d *man/group_correlated_features.Rd
 1c884c358932d2366717e93354f4c931 *man/is_whole_number.Rd
 bb89d3c3aa7898c07dddcda70ff8e5c1 *man/keep_groups_in_cv_partitions.Rd
-cd899995eff5fb663e860d3d0193a6cb *man/mikropml.Rd
+8c007c07d63f375c4076ab26550e7df8 *man/mikropml-package.Rd
 d240d589a960b35b2d3caad6921af1b8 *man/mutate_all_types.Rd
 6b041d90e838d316357fa153f78ec52a *man/otu_data_preproc.Rd
 baa504f4095b3fcd385d66ae8d3e4f40 *man/otu_mini_bin.Rd

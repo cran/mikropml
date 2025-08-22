@@ -50,7 +50,7 @@ overflow: visible;
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -61,7 +61,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
 { counter-reset: source-line 0; }
@@ -149,6 +149,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; }
 div.csl-bib-body { }
 div.csl-entry {
 clear: both;
+margin-bottom: 0em;
 }
 .hanging div.csl-entry {
 margin-left:2em;
@@ -889,14 +890,14 @@ features are important in predicting your outcome.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>results_imp<span class="sc">$</span>feature_importance</span>
 <span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="co">#&gt;    perf_metric perf_metric_diff     pvalue   lower   upper     feat method</span></span>
 <span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="co">#&gt; 1    0.5459125        0.0003375 0.51485149 0.49125 0.60250 Otu00001     rf</span></span>
-<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a><span class="co">#&gt; 2    0.5682625       -0.0220125 0.73267327 0.50625 0.63125 Otu00002     rf</span></span>
-<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="co">#&gt; 3    0.5482875       -0.0020375 0.56435644 0.50500 0.59000 Otu00003     rf</span></span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a><span class="co">#&gt; 2    0.5682625       -0.0220125 0.72277228 0.50625 0.63125 Otu00002     rf</span></span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="co">#&gt; 3    0.5482875       -0.0020375 0.55445545 0.50500 0.59000 Otu00003     rf</span></span>
 <span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a><span class="co">#&gt; 4    0.6314375       -0.0851875 1.00000000 0.55250 0.71250 Otu00004     rf</span></span>
 <span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a><span class="co">#&gt; 5    0.4991750        0.0470750 0.08910891 0.44125 0.57125 Otu00005     rf</span></span>
 <span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a><span class="co">#&gt; 6    0.5364875        0.0097625 0.28712871 0.50125 0.57375 Otu00006     rf</span></span>
 <span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a><span class="co">#&gt; 7    0.5382875        0.0079625 0.39603960 0.47500 0.58750 Otu00007     rf</span></span>
 <span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a><span class="co">#&gt; 8    0.5160500        0.0302000 0.09900990 0.46750 0.55750 Otu00008     rf</span></span>
-<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a><span class="co">#&gt; 9    0.5293375        0.0169125 0.17821782 0.49500 0.55625 Otu00009     rf</span></span>
+<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a><span class="co">#&gt; 9    0.5293375        0.0169125 0.16831683 0.49500 0.55625 Otu00009     rf</span></span>
 <span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a><span class="co">#&gt; 10   0.4976500        0.0486000 0.12871287 0.41000 0.56250 Otu00010     rf</span></span>
 <span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a><span class="co">#&gt;    perf_metric_name seed</span></span>
 <span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a><span class="co">#&gt; 1               AUC 2019</span></span>
@@ -1074,7 +1075,7 @@ of the rest is the same:</p>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1 class="unnumbered">References</h1>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-tang_democratizing_2020" class="csl-entry">
 Tang, Shengpu, Parmida Davarmanesh, Yanmeng Song, Danai Koutra, Michael
 W. Sjoding, and Jenna Wiens. 2020. <span>“Democratizing <span>EHR</span>

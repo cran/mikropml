@@ -150,7 +150,6 @@ run_ml <-
       method,
       find_feature_importance,
       kfold,
-      training_frac,
       perf_metric_function,
       perf_metric_name,
       groups,
@@ -171,7 +170,7 @@ run_ml <-
     # can't have categorical features for feature importance because have to find correlations
     outcome_colname <- check_outcome_column(dataset, outcome_colname)
     if (find_feature_importance) {
-      check_cat_feats(dataset %>% dplyr::select(-outcome_colname))
+      check_cat_feats(dataset %>% dplyr::select(-tidyselect::all_of(outcome_colname)))
     }
 
     dataset <- dataset %>%
@@ -183,6 +182,7 @@ run_ml <-
     outcomes_vctr <- dataset %>% dplyr::pull(outcome_colname)
 
     if (length(training_frac) == 1) {
+      check_training_frac(training_frac)
       training_inds <- get_partition_indices(outcomes_vctr,
         training_frac = training_frac,
         groups = groups,
